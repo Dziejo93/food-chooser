@@ -3,8 +3,11 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const session = require('express-session')
+
 const routes = require('./routes/index');
-const authRoute = require('./routes/authRoutes')
+const authRoutes = require('./routes/auth-routes')
+const profileRoutes=require('./routes/profile-routes')
+
 const passportSetup = require('./config/passport-setup')
 const mongoose = require('mongoose')
 const keys = require('./config/keys')
@@ -37,7 +40,8 @@ mongoose.connect(keys.mongodb.dbURI, () => {
 
 //routes
 app.use('/', routes)
-app.use('/auth', authRoute)
+app.use('/auth', authRoutes)
+app.use('/profile',profileRoutes)
 
 app.use((req, res, next) => {
     res.status(404).render('404')

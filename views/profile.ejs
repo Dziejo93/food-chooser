@@ -8,13 +8,13 @@
     <body>
         <nav>
             <ul>
-                <li><a href="/logout">Logout</a></li>
-                <li><a href="/login">Login</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+                <li><a href="/auth/login">Login</a></li>
                 <li><a href="/">Homepage</a></li>
             </ul>
         </nav>
         <header>
-            <h1>Logged</h1>
+            <h1>Welcome to Your profile, <%= user.username %></h1>
             <h2>Logged</h2>
         </header>
         <main>

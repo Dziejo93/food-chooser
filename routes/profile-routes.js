@@ -3,6 +3,6 @@ const passport = require('passport')
 const ProfileController = require('../controllers/ProfileController')
 
 
-router.get('/',ProfileController.logged)
+router.get('/',ProfileController.authCheck,ProfileController.logged)
 
 module.exports = router;

@@ -1,5 +1,5 @@
 const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth20').Strategy
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const keyes = require('./keys.js')
 const User = require('../models/user-model')
 
@@ -19,10 +19,9 @@ passport.use(
         clientID: keyes.google.clientID,
         clientSecret: keyes.google.clientSecret
     }, (accesToken, refreshToken, profile, done) => {
-        //check if user exists in db
-
+        // check if user exists in db
         User.findOne({
-            googleID: profile.id
+            authTypeID: profile.id
         }).then((currentUser) => {
             if (currentUser) {
                 //exists
@@ -32,16 +31,13 @@ passport.use(
             } else {
                 new User({
                     username: profile.displayName,
-                    googleID: profile.id
+                    authType: 'google',
+                    authTypeID: profile.id
                 }).save().then((newUser) => {
                     console.log('new user created' + newUser);
                     done(null, newUser)
                 })
             }
         })
-
-
-
-
     })
 )

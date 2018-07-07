@@ -12,6 +12,7 @@ exports.login=(req, res) => {
 
 //auth logout
 exports.logout=(req,res)=>{
-    res.send('logging out')
+    req.logout()
+    res.redirect('/')
 }
 

@@ -8,3 +8,7 @@ exports.googleLogin = (passport.authenticate('google', {
 exports.googleRedir = [passport.authenticate('google'), (req, res) => {
     res.redirect('/profile')
 }]
+
+
+//auth facebook
+exports.facebookLogin=(passport.authenticate('facebook'))

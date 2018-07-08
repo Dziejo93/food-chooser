@@ -1,6 +1,7 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const keyes = require('./keys.js')
+const FacebookStrategy = require('passport-facebook').Strategy
+const keys = require('./keys.js')
 const User = require('../models/user-model')
 
 passport.serializeUser((user, done) => {
@@ -13,11 +14,13 @@ passport.deserializeUser((id, done) => {
     })
 })
 
+
+//google strategy
 passport.use(
     new GoogleStrategy({
         callbackURL: '/auth/google/redirect',
-        clientID: keyes.google.clientID,
-        clientSecret: keyes.google.clientSecret
+        clientID: keys.google.clientID,
+        clientSecret: keys.google.clientSecret
     }, (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
         User.findOne({
@@ -31,8 +34,8 @@ passport.use(
             } else {
                 new User({
                     username: profile.displayName,
-                    authType: 'google',
-                    authTypeID: profile.id
+                    authProvider: 'google',
+                    authProviderID: profile.id
                 }).save().then((newUser) => {
                     console.log('new user created' + newUser);
                     done(null, newUser)
@@ -41,3 +44,16 @@ passport.use(
         })
     })
 )
+
+//facebook Strategy
+passport.use(new FacebookStrategy({
+        clientID: keys.facebook.clientID,
+        clientSecret: keys.facebook.clientSecret,
+        callbackURL: '/auth/facebook/redirect'
+    }, (accesToken, refreshToken, profile, done) => {
+        console.log(profile);
+        return done(null, profile)
+
+    }
+
+))

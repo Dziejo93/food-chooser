@@ -11,4 +11,7 @@ router.get('/logout', PagesController.logout)
 
 router.get('/google', OAuthController.googleLogin)
 router.get('/google/redirect', ...OAuthController.googleRedir)
+
+router.get('/facebook',OAuthController.facebookLogin)
+
 module.exports = router;

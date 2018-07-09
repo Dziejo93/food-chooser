@@ -1,7 +1,8 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
-const keys = require('./keys.js')
+//const keys = require('./keys.js')
+
 const User = require('../models/user-model')
 
 passport.serializeUser((user, done) => {
@@ -19,8 +20,8 @@ passport.deserializeUser((id, done) => {
 passport.use(
     new GoogleStrategy({
         callbackURL: '/auth/google/redirect',
-        clientID: keys.google.clientID,
-        clientSecret: keys.google.clientSecret
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret:  process.env.GOOGLE_CLIENT_SECRET
     }, (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
         User.findOne({
@@ -47,8 +48,8 @@ passport.use(
 
 //facebook Strategy
 passport.use(new FacebookStrategy({
-        clientID: keys.facebook.clientID,
-        clientSecret: keys.facebook.clientSecret,
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL: '/auth/facebook/redirect'
     }, (accesToken, refreshToken, profile, done) => {
         console.log(profile);

@@ -1,5 +1,6 @@
+require('dotenv').config({path:'./config/.env'})
 const express = require('express')
-const session = require('express-session')
+const expressSession = require('express-session')
 const path = require('path')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
@@ -26,7 +27,7 @@ app.use('/public',express.static(path.join(__dirname, 'public')))
 //cookie uptime for 1 day
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
-    keys: [keys.session.cookieKey]
+    keys: [process.env.COOKIE_KEY]
 }))
 
 //init passport
@@ -35,7 +36,7 @@ app.use(passport.session())
 
 
 //connect mongodb
-mongoose.connect(keys.mongodb.dbURI, () => {
+mongoose.connect(process.env.DB_URI, () => {
     console.log('conneted to db');
 
 })

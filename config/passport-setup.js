@@ -19,7 +19,8 @@ passport.deserializeUser((id, done) => {
 //google strategy
 passport.use(
     new GoogleStrategy({
-        callbackURL: '/auth/google/redirect',
+        callbackURL:' https://food-chooser-ag.herokuapp.com/auth/google/redirect',
+        //callbackURL: '/auth/google/redirect',
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret:  process.env.GOOGLE_CLIENT_SECRET
     }, (accesToken, refreshToken, profile, done) => {

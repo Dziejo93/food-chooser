@@ -13,5 +13,6 @@ router.get('/google', OAuthController.googleLogin)
 router.get('/google/redirect', ...OAuthController.googleRedir)
 
 router.get('/facebook',OAuthController.facebookLogin)
+router.get('/facebook/redirect',...OAuthController.facebookRedir)
 
 module.exports = router;

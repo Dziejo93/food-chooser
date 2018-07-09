@@ -8,7 +8,7 @@ const flash = require('connect-flash')
 const routes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes')
 const profileRoutes=require('./routes/profile-routes')
-const keys = require('./config/keys')
+
 
 const passportSetup = require('./config/passport-setup')
 const passport = require('passport')

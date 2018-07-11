@@ -1,8 +1,8 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const FacebookStrategy = require('passport-facebook').Strategy
-//const keys = require('./keys.js')
-
+const LocalStrategy = require('passport-local').Strategy
+const bcrypt = require('bcrypt')
 const User = require('../models/user-model')
 
 passport.serializeUser((user, done) => {
@@ -29,12 +29,13 @@ passport.use(
         }).then((currentUser) => {
             if (currentUser) {
                 //exists
-                console.log('user is', currentUser);
+                console.log('user is', currentUser)
                 done(null, currentUser)
 
             } else {
                 new User({
                     username: profile.displayName,
+                    password: null,
                     authProvider: 'google',
                     authProviderID: profile.id
                 }).save().then((newUser) => {
@@ -45,6 +46,22 @@ passport.use(
         })
     })
 )
+
+passport.use(new LocalStrategy((username, password, done) => {
+    User.findOne({
+        authTypeID: username
+    }).then((currentUser) => {
+        if (currentUser) {
+            if (currentUser.password != password) {
+
+            } else {
+                console.log('wrong password');
+
+            }
+        }
+    })
+}))
+
 
 //facebook Strategy
 passport.use(new FacebookStrategy({

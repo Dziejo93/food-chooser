@@ -34,6 +34,10 @@ app.use(cookieSession({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ // parse application/json
+app.use(bodyParser.json())
 
 //connect mongodb
 mongoose.connect(process.env.DB_URI, () => {

@@ -1,4 +1,14 @@
 const passport = require('passport')
+//auth local
+exports.localRegister = (req,res) => {
+res.json({
+    'username':req.body.username,
+    'password':req.body.password
+})
+}
+
+
+
 
 //auth google
 exports.googleLogin = (passport.authenticate('google', {

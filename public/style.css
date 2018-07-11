@@ -12,7 +12,7 @@ nav {
 nav ul {
     max-width: 960px;
     margin: 0 auto;
-   
+
     padding: 0;
 }
 
@@ -33,6 +33,22 @@ nav a {
 }
 
 main,
+
+ul {
+    max-width: 960px;
+    margin: 0 auto;
+
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    display: block;
+
+    margin: 20px 0 20px;
+}
+
+
 header {
     max-width: 960px;
     margin: 30px auto;
@@ -47,4 +63,13 @@ header {
     padding: 10px;
     border: cornsilk;
     background: #ff5353;
+}
+
+.facebook-btn{
+    color: #fff;
+    text-decoration: none;
+    font-size: 19px;
+    padding: 10px;
+    border: cornsilk;
+    background: #412297;
 }

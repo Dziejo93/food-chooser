@@ -2,17 +2,20 @@ const express = require('express')
 const router = express.Router()
 const passport = require('passport')
 const PagesController = require('../controllers/PagesController')
-const OAuthController = require('../controllers/OAuthControllers')
+const PassportController = require('../controllers/PassportController')
 
 
 
 router.get('/login', PagesController.login)
 router.get('/logout', PagesController.logout)
+router.get('/register',PagesController.register)
 
-router.get('/google', OAuthController.googleLogin)
-router.get('/google/redirect', ...OAuthController.googleRedir)
+router.post('/register',PassportController.localRegister)
 
-router.get('/facebook',OAuthController.facebookLogin)
-router.get('/facebook/redirect',...OAuthController.facebookRedir)
+router.get('/google', PassportController.googleLogin)
+router.get('/google/redirect', ...PassportController.googleRedir)
+
+router.get('/facebook',PassportController.facebookLogin)
+router.get('/facebook/redirect',...PassportController.facebookRedir)
 
 module.exports = router;

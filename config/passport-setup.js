@@ -25,7 +25,7 @@ passport.use(
     }, (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
         User.findOne({
-            authTypeID: profile.id
+            authProviderID: profile.id
         }).then((currentUser) => {
             if (currentUser) {
                 //exists

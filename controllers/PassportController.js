@@ -1,6 +1,6 @@
 const passport = require('passport')
 //auth local
-exports.localRegister = (req,res) => {
+exports.localSignUp = (req,res) => {
 res.json({
     'username':req.body.username,
     'password':req.body.password

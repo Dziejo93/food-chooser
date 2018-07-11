@@ -10,7 +10,7 @@ router.get('/login', PagesController.login)
 router.get('/logout', PagesController.logout)
 router.get('/register',PagesController.register)
 
-router.post('/register',PassportController.localRegister)
+router.post('/register',PassportController.localSignUp)
 
 router.get('/google', PassportController.googleLogin)
 router.get('/google/redirect', ...PassportController.googleRedir)

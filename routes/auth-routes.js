@@ -6,10 +6,12 @@ const PassportController = require('../controllers/PassportController')
 
 
 
-router.get('/login', PagesController.login)
-router.get('/logout', PagesController.logout)
-router.get('/register',PagesController.register)
+router.get('/login', PassportController.login)
+router.post('/login',...PassportController.localLogin)
 
+router.get('/logout', PassportController.logout)
+
+router.get('/register',PassportController.register)
 router.post('/register',PassportController.localSignUp)
 
 router.get('/google', PassportController.googleLogin)

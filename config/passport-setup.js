@@ -24,6 +24,7 @@ passport.use(
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }, (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
+        //toDo change into service
         User.findOne({
             authProviderID: profile.id
         }).then((currentUser) => {
@@ -49,15 +50,21 @@ passport.use(
 
 passport.use(new LocalStrategy((username, password, done) => {
     User.findOne({
-        authTypeID: username
+        username: username
     }).then((currentUser) => {
         if (currentUser) {
-            if (currentUser.password != password) {
-
+            //exists
+            if (currentUser.password === password) {
+                console.log('user is' + currentUser);
+                done(null, currentUser)
             } else {
                 console.log('wrong password');
-
+                done(null, false)
             }
+        } else if (!currentUser) {
+            console.log('user not exists');
+            done(null)
+
         }
     })
 }))

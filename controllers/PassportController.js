@@ -1,5 +1,4 @@
 const User = require('../models/user-model')
-
 const passport = require('passport')
 
 //auth login
@@ -20,7 +19,7 @@ exports.register = (req, res) => {
 
 //auth local
 exports.localSignUp = (req, res) => {
-    //toDo change into service
+    //TODO: change into service, hash password
     console.log(req.body.username);
     User.findOne({
         username: req.body.username

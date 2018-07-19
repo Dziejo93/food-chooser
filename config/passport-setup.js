@@ -24,7 +24,6 @@ passport.use(
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }, (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
-        //TODO: change into service
         User.findOne({
             authProviderID: profile.id
         }).then((currentUser) => {
@@ -54,9 +53,7 @@ passport.use(new LocalStrategy((username, password, done) => {
     }).then(function (currentUser) {
         if (currentUser) {
             //exists
-            console.log('123');
-            console.log(currentUser);
-
+            //TODO: change into user-model
             bcrypt.compare(password, currentUser.password).then(function (res) {
                 if (res) {
                     console.log('user is' + currentUser);

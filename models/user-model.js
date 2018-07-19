@@ -9,35 +9,30 @@ const userSchema = new Schema({
     authProviderID: String
 })
 
-userSchema.pre('save', function (next) {
-    const user = this
+// userSchema.pre('save', function (next) {
+//     const user = this
+//     this.hashPassword(user.password, function (err, hash) {
+//         if (err) {
+//             return next(err)
+//         }
+//         user.password = hash
+//         next()
+//     })
+// })
 
-    this.hashPassword(user.password, function (err, hash) {
-        if (err) {
-            return next(err)
-        }
-        user.password = hash
-        next()
-    })
-})
-
-userSchema.methods.hashPassword = function (password, cb) {
-    bcrypt.genSalt(11, (err, salt) => {
-        if (err) {
-            return cb(err)
-        }
-        bcrypt.hash(password, salt, (err, hash) => {
-            if (err) {
-                return cb(err)
-            }
-            return cb(null, hash);
-
-        })
-
-
-
-    })
-}
+// userSchema.methods.hashPassword = function (password, cb) {
+//         bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS), (err, salt) => {
+//         if (err) {
+//             return cb(err)
+//         }
+//         bcrypt.hash(password, salt, (err, hash) => {
+//             if (err) {
+//                 return cb(err)
+//             }
+//             return cb(null, hash);
+//         })
+//     })
+// }
 
 
 

@@ -1,6 +1,6 @@
 const User = require('../models/user-model')
 const passport = require('passport')
-
+const bcrypt = require('bcrypt')
 //auth login
 exports.login = (req, res) => {
     res.render('login')
@@ -28,15 +28,27 @@ exports.localSignUp = (req, res) => {
             console.log('user exists');
             res.render('register')
         } else {
-            new User({
-                username: req.body.username,
-                password: req.body.password,
-                authProvider: 'local',
-                authProviderID: null
-            }).save().then((newUser) => {
-                console.log('new user created' + newUser);
-                res.redirect('/profile')
+            bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS), (err, salt) => {
+                if (err) {
+                    return (err)
+                }
+                bcrypt.hash(req.body.password, salt, (err, hash) => {
+                    if (err) {
+                        return (err)
+                    }
+                    new User({
+                        username: req.body.username,
+                        password: hash,
+                        authProvider: 'local',
+                        authProviderID: null
+                    }).save().then((newUser) => {
+                        console.log('new user created' + newUser);
+                        res.redirect('/profile')
+                    })
+                })
             })
+
+
         }
     })
 }

@@ -16,43 +16,22 @@ exports.register = (req, res) => {
     res.render('register')
 }
 
+//////////////////////Local strategies///////////////////////////////
 
-//auth local
-exports.localSignUp = (req, res) => {
-    //TODO: change into service, hash password
-    console.log(req.body.username);
-    User.findOne({
-        'local.username': req.body.username
-    }).then((user) => {
-        if (user) {
-            console.log('user exists');
-            res.render('register')
-        } else {
-            new User({
-                'local.username': req.body.username,
-                'local.password': req.body.password,
-            }).save().then((newUser) => {
-                console.log('new user created' + newUser);
-                res.redirect('/profile')
-            })
-            //     })
-            // })
+exports.localSignUp = [passport.authenticate('local-signup', {
+    failureRedirect: '/auth/register'
+}), (req, res) => {
+    res.redirect('login')
+}]
+
+exports.localLogin = [passport.authenticate('local-login', {
+    failureRedirect: '/auth/login'
+}), (req, res) => {
+    res.redirect('/profile')
+}]
 
 
-        }
-    })
-}
-
-
-exports.localLogin = [passport.authenticate('local', {
-        failureRedirect: '/auth/login'
-    }),
-    (req, res) => {
-        res.redirect('/profile')
-    }
-]
-
-//auth google
+////////////////////////Google strategies////////////////////////////
 exports.googleLogin = (passport.authenticate('google', {
     scope: ['profile']
 }))

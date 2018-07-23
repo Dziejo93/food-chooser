@@ -33,7 +33,6 @@ passport.use(
 
             } else {
                 console.log(profile);
-
                 new User({
                     'google.id': profile.id,
                     'google.token': profile.token,
@@ -47,7 +46,39 @@ passport.use(
     })
 )
 
-passport.use(new LocalStrategy((username, password, done) => {
+passport.use('local-signup', new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password',
+        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function (req, username, password, done) {
+        User.findOne({
+            'local.username': username
+        }).then((user) => {
+            if (user) {
+                console.log('user exists');
+                done(null,user)
+            } else {
+                new User({
+                    'local.username': username,
+                    'local.password': password,
+                }).save().then((newUser) => {
+                    console.log('new user created' + newUser);
+                    done(null,newUser)
+                })
+            }
+        })
+    }))
+
+
+
+
+
+passport.use('local-login', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+}, function (req, username, password, done) {
     User.findOne({
         'local.username': username
     }).then(function (currentUser) {

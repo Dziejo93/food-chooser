@@ -15,7 +15,6 @@ passport.deserializeUser((id, done) => {
     })
 })
 
-
 //google strategy
 passport.use(
     new GoogleStrategy({
@@ -25,7 +24,7 @@ passport.use(
     }, (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
         User.findOne({
-            authProviderID: profile.id
+            'google.id': profile.id
         }).then((currentUser) => {
             if (currentUser) {
                 //exists
@@ -33,11 +32,11 @@ passport.use(
                 done(null, currentUser)
 
             } else {
+                console.log(profile);
                 new User({
-                    username: profile.displayName,
-                    password: null,
-                    authProvider: 'google',
-                    authProviderID: profile.id
+                    'google.id': profile.id,
+                    'google.token': profile.token,
+                    'google.name': profile.displayName
                 }).save().then((newUser) => {
                     console.log('new user created' + newUser);
                     done(null, newUser)
@@ -47,31 +46,59 @@ passport.use(
     })
 )
 
-passport.use(new LocalStrategy((username, password, done) => {
-    User.findOne({
-        authTypeID: username
-    }).then((currentUser) => {
-        if (currentUser) {
-            if (currentUser.password != password) {
-
+passport.use('local-signup', new LocalStrategy({
+        usernameField: 'username',
+        passwordField: 'password',
+        passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+    },
+    function (req, username, password, done) {
+        User.findOne({
+            'local.username': username
+        }).then((user) => {
+            if (user) {
+                console.log('user exists');
+                done(null,user)
             } else {
-                console.log('wrong password');
-
+                new User({
+                    'local.username': username,
+                    'local.password': password,
+                }).save().then((newUser) => {
+                    console.log('new user created' + newUser);
+                    done(null,newUser)
+                })
             }
+        })
+    }))
+
+
+
+
+
+passport.use('local-login', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+}, function (req, username, password, done) {
+    User.findOne({
+        'local.username': username
+    }).then(function (currentUser) {
+        if (currentUser) {
+            //exists
+            //TODO: change into user-model
+            bcrypt.compare(password, currentUser.local.password).then(function (res) {
+                if (res) {
+                    console.log('user is' + currentUser);
+                    done(null, currentUser)
+                } else {
+                    console.log('wrong password');
+                    done(null, false)
+                }
+            })
+
+        } else if (!currentUser) {
+            console.log('user not exists');
+            done(null)
+
         }
     })
 }))
-
-
-//facebook Strategy
-passport.use(new FacebookStrategy({
-        clientID: process.env.FACEBOOK_CLIENT_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: '/auth/facebook/redirect'
-    }, (accesToken, refreshToken, profile, done) => {
-        console.log(profile);
-        return done(null, profile)
-
-    }
-
-))

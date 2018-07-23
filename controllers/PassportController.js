@@ -22,31 +22,21 @@ exports.localSignUp = (req, res) => {
     //TODO: change into service, hash password
     console.log(req.body.username);
     User.findOne({
-        username: req.body.username
+        'local.username': req.body.username
     }).then((user) => {
         if (user) {
             console.log('user exists');
             res.render('register')
         } else {
-            bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS), (err, salt) => {
-                if (err) {
-                    return (err)
-                }
-                bcrypt.hash(req.body.password, salt, (err, hash) => {
-                    if (err) {
-                        return (err)
-                    }
-                    new User({
-                        username: req.body.username,
-                        password: hash,
-                        authProvider: 'local',
-                        authProviderID: null
-                    }).save().then((newUser) => {
-                        console.log('new user created' + newUser);
-                        res.redirect('/profile')
-                    })
-                })
+            new User({
+                'local.username': req.body.username,
+                'local.password': req.body.password,
+            }).save().then((newUser) => {
+                console.log('new user created' + newUser);
+                res.redirect('/profile')
             })
+            //     })
+            // })
 
 
         }
@@ -68,13 +58,5 @@ exports.googleLogin = (passport.authenticate('google', {
 }))
 
 exports.googleRedir = [passport.authenticate('google'), (req, res) => {
-    res.redirect('/profile')
-}]
-
-
-//auth facebook
-exports.facebookLogin = (passport.authenticate('facebook'))
-
-exports.facebookRedir = [passport.authenticate('facebook'), (req, res) => {
     res.redirect('/profile')
 }]

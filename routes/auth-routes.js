@@ -17,7 +17,4 @@ router.post('/register',PassportController.localSignUp)
 router.get('/google', PassportController.googleLogin)
 router.get('/google/redirect', ...PassportController.googleRedir)
 
-router.get('/facebook',PassportController.facebookLogin)
-router.get('/facebook/redirect',...PassportController.facebookRedir)
-
 module.exports = router;

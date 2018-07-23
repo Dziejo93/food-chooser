@@ -15,7 +15,6 @@ passport.deserializeUser((id, done) => {
     })
 })
 
-
 //google strategy
 passport.use(
     new GoogleStrategy({
@@ -25,7 +24,7 @@ passport.use(
     }, (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
         User.findOne({
-            authProviderID: profile.id
+            'google.id': profile.id
         }).then((currentUser) => {
             if (currentUser) {
                 //exists
@@ -33,11 +32,12 @@ passport.use(
                 done(null, currentUser)
 
             } else {
+                console.log(profile);
+
                 new User({
-                    username: profile.displayName,
-                    password: null,
-                    authProvider: 'google',
-                    authProviderID: profile.id
+                    'google.id': profile.id,
+                    'google.token': profile.token,
+                    'google.name': profile.displayName
                 }).save().then((newUser) => {
                     console.log('new user created' + newUser);
                     done(null, newUser)
@@ -49,12 +49,12 @@ passport.use(
 
 passport.use(new LocalStrategy((username, password, done) => {
     User.findOne({
-        username: username
+        'local.username': username
     }).then(function (currentUser) {
         if (currentUser) {
             //exists
             //TODO: change into user-model
-            bcrypt.compare(password, currentUser.password).then(function (res) {
+            bcrypt.compare(password, currentUser.local.password).then(function (res) {
                 if (res) {
                     console.log('user is' + currentUser);
                     done(null, currentUser)
@@ -71,17 +71,3 @@ passport.use(new LocalStrategy((username, password, done) => {
         }
     })
 }))
-
-
-//facebook Strategy
-passport.use(new FacebookStrategy({
-        clientID: process.env.FACEBOOK_CLIENT_ID,
-        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL: '/auth/facebook/redirect'
-    }, (accesToken, refreshToken, profile, done) => {
-        console.log(profile);
-        return done(null, profile)
-
-    }
-
-))

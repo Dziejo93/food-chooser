@@ -4,15 +4,13 @@ const expressSession = require('express-session')
 const path = require('path')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
-
+const morgan=require('morgan')
 const routes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes')
 const profileRoutes=require('./routes/profile-routes')
-
-
+const apiRoutes=require('./routes/api/api-routes')
 const passportSetup = require('./config/passport-setup')
 const passport = require('passport')
-
 const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
 
@@ -23,6 +21,7 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 app.use('/public',express.static(path.join(__dirname, 'public')))
+app.use(morgan('dev'))
 
 //cookie uptime for 1 day
 app.use(cookieSession({
@@ -49,6 +48,7 @@ mongoose.connect(process.env.DB_URI, () => {
 app.use('/', routes)
 app.use('/auth', authRoutes)
 app.use('/profile',profileRoutes)
+app.use('/api',apiRoutes)
 
 app.use((req, res, next) => {
     res.status(404).render('404')

@@ -4,14 +4,27 @@ const passport = require('passport')
 const PagesController = require('../controllers/PagesController')
 const PassportController = require('../controllers/PassportController')
 
-router.get('/login', PassportController.login)
-router.post('/login',...PassportController.localLogin)
 
-router.get('/register',PassportController.register)
-router.post('/register',PassportController.localSignUp)
+router.route('/login')
+    .get(PassportController.login)
+    .post(...PassportController.localLogin)
 
-router.get('/google', PassportController.googleLogin)
-router.get('/google/redirect', ...PassportController.googleRedir)
 
-router.get('/logout', PassportController.logout)
+router.route('/register')
+    .get(PassportController.register)
+    .post(PassportController.localSignUp)
+
+
+router.route('/google')
+    .get(PassportController.googleLogin)
+
+
+router.route('/google/redirect')
+    .get(...PassportController.googleRedir)
+
+
+router.route('/logout')
+    .get(PassportController.logout)
+
+    
 module.exports = router;

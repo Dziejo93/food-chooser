@@ -1,8 +1,10 @@
 const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+const GoogleStrategy = require('passport-google-plus-token')
 const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy;
-const { ExtractJwt } = require('passport-jwt');
+const {
+    ExtractJwt
+} = require('passport-jwt');
 const bcrypt = require('bcrypt')
 const User = require('../models/user-model')
 
@@ -22,29 +24,29 @@ passport.deserializeUser((id, done) => {
 passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: process.env.JWT_SECRET
-  }, async (payload, done) => {
+}, async (payload, done) => {
     try {
-      // Find the user specified in token
-      const user = await User.findById(payload.sub);
-  
-      // If user doesn't exists, handle it
-      if (!user) {
-        return done(null, false);
-      }
+        // Find the user specified in token
+        const user = await User.findById(payload.sub);
 
-      // Otherwise, return the user
-      done(null, user);
-    } catch(error) {
-      done(error, false);
+        // If user doesn't exists, handle it
+        if (!user) {
+            return done(null, false);
+        }
+
+        // Otherwise, return the user
+        done(null, user);
+    } catch (error) {
+        done(error, false);
     }
-  }));
+}));
 
 
 
 //google strategy
-passport.use(
+passport.use('googleToken',
     new GoogleStrategy({
-        callbackURL: '/auth/google/redirect',
+        // callbackURL: '/auth/google/redirect',
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }, (accesToken, refreshToken, profile, done) => {

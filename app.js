@@ -23,13 +23,13 @@ app.set('view engine', 'ejs')
 app.use('/public',express.static(path.join(__dirname, 'public')))
 app.use(morgan('dev'))
 
-//cookie uptime for 1 day
+// cookie uptime for 1 day
 app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [process.env.COOKIE_KEY]
 }))
 
-//init passport
+// //init passport
 app.use(passport.initialize())
 app.use(passport.session())
 

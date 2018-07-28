@@ -19,8 +19,8 @@ router.route('/google')
     .get(PassportController.googleLogin)
 
 
-router.route('/google/redirect')
-    .get(...PassportController.googleRedir)
+// router.route('/google/redirect')
+//     .get(...PassportController.googleRedir)
 
 
 router.route('/logout')

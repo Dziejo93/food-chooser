@@ -13,16 +13,14 @@ const userSchema = new Schema({
     },
     google: {
         id: String,
+        name: String,
         token: {
             token: String,
             expiryDate: Date
-        },
-        name: String
+        }
     },
 
 })
-
-
 
 userSchema.pre('save', function (next) {
     const user = this

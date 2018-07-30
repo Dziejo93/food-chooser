@@ -1,5 +1,5 @@
 const passport = require('passport')
-const GoogleStrategy = require('passport-google-plus-token')
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy;
 const {
@@ -44,9 +44,9 @@ passport.use(new JwtStrategy({
 
 
 //google strategy
-passport.use('googleToken',
+passport.use(
     new GoogleStrategy({
-        // callbackURL: '/auth/google/redirect',
+        callbackURL: '/auth/google/redirect',
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }, (accesToken, refreshToken, profile, done) => {

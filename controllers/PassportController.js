@@ -47,16 +47,14 @@ module.exports = {
 
 
     ////////////////////////Google strategies////////////////////////////
-    googleLogin: (passport.authenticate('googleToken', {
-        session: false
-    }), async (req, res) => {
+    googleLogin: async (req, res, next) => {
+
+    },
+
+    googleRedir: [passport.authenticate('google'), (req, res) => {
         const token = signToken(req.user)
         res.status(200).json({
             token
         })
-    }),
-
-    // googleRedir: [passport.authenticate('google'), (req, res) => {
-    //     res.redirect('/profile')
-    // }]
+    }]
 }

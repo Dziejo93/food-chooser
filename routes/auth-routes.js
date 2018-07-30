@@ -16,15 +16,17 @@ router.route('/register')
 
 
 router.route('/google')
-    .get(PassportController.googleLogin)
+    .get(passport.authenticate('google', {
+       scope: ['profile']
+    }), PassportController.googleLogin)
 
 
-// router.route('/google/redirect')
-//     .get(...PassportController.googleRedir)
+router.route('/google/redirect')
+    .get(...PassportController.googleRedir)
 
 
 router.route('/logout')
     .get(PassportController.logout)
 
-    
+
 module.exports = router;

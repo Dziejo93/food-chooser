@@ -1,9 +1,13 @@
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
-const FacebookStrategy = require('passport-facebook').Strategy
 const LocalStrategy = require('passport-local').Strategy
+const JwtStrategy = require('passport-jwt').Strategy;
+const {
+    ExtractJwt
+} = require('passport-jwt');
 const bcrypt = require('bcrypt')
 const User = require('../models/user-model')
+
 
 passport.serializeUser((user, done) => {
     done(null, user.id)
@@ -14,6 +18,30 @@ passport.deserializeUser((id, done) => {
         done(null, user)
     })
 })
+//TODO:change promises to async
+
+// JSON WEB TOKENS STRATEGY
+passport.use(new JwtStrategy({
+    jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+    secretOrKey: process.env.JWT_SECRET
+}, async (payload, done) => {
+    try {
+        // Find the user specified in token
+        const user = await User.findById(payload.sub);
+
+        // If user doesn't exists, handle it
+        if (!user) {
+            return done(null, false);
+        }
+
+        // Otherwise, return the user
+        done(null, user);
+    } catch (error) {
+        done(error, false);
+    }
+}));
+
+
 
 //google strategy
 passport.use(
@@ -46,6 +74,7 @@ passport.use(
     })
 )
 
+//local stategies
 passport.use('local-signup', new LocalStrategy({
         usernameField: 'username',
         passwordField: 'password',
@@ -56,15 +85,16 @@ passport.use('local-signup', new LocalStrategy({
             'local.username': username
         }).then((user) => {
             if (user) {
+                //make response 403
                 console.log('user exists');
-                done(null,user)
+                done(null, user)
             } else {
                 new User({
                     'local.username': username,
                     'local.password': password,
                 }).save().then((newUser) => {
                     console.log('new user created' + newUser);
-                    done(null,newUser)
+                    done(null, newUser)
                 })
             }
         })

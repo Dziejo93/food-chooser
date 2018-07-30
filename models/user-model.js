@@ -1,18 +1,25 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
-
 const userSchema = new Schema({
 
     local: {
         username: String,
         password: String,
+        token: {
+            token: String,
+            expiryDate: Date
+        }
     },
     google: {
         id: String,
-        token: String,
-        name: String
-    }
+        name: String,
+        token: {
+            token: String,
+            expiryDate: Date
+        }
+    },
+
 })
 
 userSchema.pre('save', function (next) {
@@ -41,6 +48,7 @@ userSchema.methods.hashPassword = function (password, cb) {
     })
 }
 
-const User = mongoose.model('user', userSchema)
+const User = mongoose.model('User', userSchema)
+
 
 module.exports = User

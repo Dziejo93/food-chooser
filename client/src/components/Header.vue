@@ -2,7 +2,7 @@
 
     <v-toolbar dark color="primary">
         <v-toolbar-items>
-            <v-btn flat dark> Menu</v-btn>
+            <v-btn flat dark @click="navigateTo('HelloWorld')"> Menu</v-btn>
         </v-toolbar-items>
 
         <v-toolbar-title class="white--text">food-chooser</v-toolbar-title>

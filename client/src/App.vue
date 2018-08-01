@@ -35,4 +35,7 @@ export default {
 .danger-alert {
   color: red;
 }
+.home {
+  cursor: pointer;
+}
 </style>

@@ -51,7 +51,7 @@ module.exports = {
     }],
 
     localLogin: [(req, res, next) => {
-        passport.authenticate('local-login', (err, user, info) => {
+        passport.authenticate('local-login', async (err, user, info) => {
             if (err) {
                 res.status(422).send({
                     message: info.message
@@ -62,7 +62,7 @@ module.exports = {
                     message: info.message
                 })
             } else {
-                const token = signToken(req.user)
+                const token = await signToken(user)
                 res.status(200).send({
                     user: user,
                     token: token

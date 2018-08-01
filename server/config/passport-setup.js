@@ -18,7 +18,7 @@ passport.deserializeUser((id, done) => {
         done(null, user)
     })
 })
-//TODO:CHANGE PROMISES TO FUCKING ASYNC 
+//TODO:CHANGE PROMISES TO FUCKING ASYNC
 
 // JSON WEB TOKENS STRATEGY
 passport.use(new JwtStrategy({

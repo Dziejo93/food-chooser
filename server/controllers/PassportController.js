@@ -27,29 +27,55 @@ module.exports = {
         res.render('register')
     },
 
-    //////////////////////Local strategies///////////////////////////////
+    ////////////////////Local strategies///////////////////////////////
 
-    localSignUp: [passport.authenticate('local-signup', {
-        failureRedirect: '/auth/register'
-    }), async (req, res) => {
-        res.redirect('login')
+
+    localSignUp: [(req, res, next) => {
+        passport.authenticate('local-signup', (err, user, info) => {
+            if (err) {
+                res.status(422).send({
+                    message: info.message
+                })
+            }
+            if (!user) {
+                res.status(401).send({
+                    message: info.message
+                })
+            } else {
+                res.status(200).send({
+                    message: 'user created'
+                })
+            }
+
+        })(req, res, next)
     }],
 
-    localLogin: [passport.authenticate('local-login', {
-        session: false,
-        failureRedirect: '/auth/login'
-    }), async (req, res) => {
-        const token = signToken(req.user)
-        res.status(200).json({
-            token
-        })
+    localLogin: [(req, res, next) => {
+        passport.authenticate('local-login', (err, user, info) => {
+            if (err) {
+                res.status(422).send({
+                    message: info.message
+                })
+            }
+            if (!user) {
+                res.status(401).send({
+                    message: info.message
+                })
+            } else {
+                const token = signToken(req.user)
+                res.status(200).send({
+                    user: user,
+                    token: token
+                })
+            }
+
+        })(req, res, next)
     }],
+
 
 
     ////////////////////////Google strategies////////////////////////////
-    googleLogin: async (req, res, next) => {
-
-    },
+    googleLogin: async (req, res, next) => {},
 
     googleRedir: [passport.authenticate('google'), (req, res) => {
         const token = signToken(req.user)

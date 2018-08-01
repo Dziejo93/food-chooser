@@ -1,18 +1,22 @@
-require('dotenv').config({path:'./config/.env'})
+require('dotenv').config({
+    path: './config/.env'
+})
 const express = require('express')
 const expressSession = require('express-session')
 const path = require('path')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
-const morgan=require('morgan')
+const morgan = require('morgan')
 const routes = require('./routes/index');
 const authRoutes = require('./routes/auth-routes')
-const profileRoutes=require('./routes/profile-routes')
-const apiRoutes=require('./routes/api/api-routes')
+const profileRoutes = require('./routes/profile-routes')
+const apiRoutes = require('./routes/api/api-routes')
 const passportSetup = require('./config/passport-setup')
 const passport = require('passport')
 const mongoose = require('mongoose')
 const cookieSession = require('cookie-session')
+const cors = require('cors')
+
 
 
 //init express
@@ -20,8 +24,10 @@ const app = express()
 //set views engine and folder + statics
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-app.use('/public',express.static(path.join(__dirname, 'public')))
+app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use(morgan('dev'))
+
+app.use(cors())
 
 // cookie uptime for 1 day
 app.use(cookieSession({
@@ -34,8 +40,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
- // parse application/json
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+// parse application/json
 app.use(bodyParser.json())
 
 //connect mongodb
@@ -47,8 +55,8 @@ mongoose.connect(process.env.DB_URI, () => {
 //routes
 app.use('/', routes)
 app.use('/auth', authRoutes)
-app.use('/profile',profileRoutes)
-app.use('/api',apiRoutes)
+app.use('/profile', profileRoutes)
+app.use('/api', apiRoutes)
 
 app.use((req, res, next) => {
     res.status(404).render('404')

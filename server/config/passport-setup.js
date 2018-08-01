@@ -18,7 +18,7 @@ passport.deserializeUser((id, done) => {
         done(null, user)
     })
 })
-//TODO:change promises to async
+//TODO:CHANGE PROMISES TO FUCKING ASYNC 
 
 // JSON WEB TOKENS STRATEGY
 passport.use(new JwtStrategy({
@@ -85,9 +85,10 @@ passport.use('local-signup', new LocalStrategy({
             'local.username': username
         }).then((user) => {
             if (user) {
-                //make response 403
-                console.log('user exists');
-                done(null, user)
+                done(null, false, {
+                    message: 'User exists'
+                })
+
             } else {
                 new User({
                     'local.username': username,
@@ -113,21 +114,23 @@ passport.use('local-login', new LocalStrategy({
         'local.username': username
     }).then(function (currentUser) {
         if (currentUser) {
-            //exists
-            //TODO: change into user-model
             bcrypt.compare(password, currentUser.local.password).then(function (res) {
                 if (res) {
                     console.log('user is' + currentUser);
                     done(null, currentUser)
                 } else {
-                    console.log('wrong password');
-                    done(null, false)
+                    req.authError = "Wrong Password"
+                    done(null, false, {
+                        message: 'Wrong password'
+                    })
                 }
             })
 
         } else if (!currentUser) {
-            console.log('user not exists');
-            done(null)
+
+            done(null, false, {
+                message: 'User not exists'
+            })
 
         }
     })

@@ -1,25 +1,28 @@
-
 <template>
+
   <v-layout align-center justify-center row fill-height>
     <v-flex xs6>
-      <v-toolbar dark color="primary">
-        <v-toolbar-title>Register</v-toolbar-title>
-      </v-toolbar>
-      <v-container>
-        <form name="tab-tracker-form" autocomplete="off">
-          <v-text-field label="Username" outline v-model="username"></v-text-field>
+      <div class="white elevation-2" align-center justify-center row fill-height>
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>Register</v-toolbar-title>
+        </v-toolbar>
+        <v-container>
+          <form name="tab-tracker-form" autocomplete="off">
+            <v-text-field label="Username" outline v-model="username"></v-text-field>
+            <br>
+            <v-text-field label="Password" outline type="password" v-model="password" autocomplete="new-password"></v-text-field>
+          </form>
           <br>
-          <v-text-field label="Password" outline type="password" v-model="password" autocomplete="new-password"></v-text-field>
-        </form>
-        <br>
-        <div class="danger-alert" v-html="error" />
-        <br>
-        <v-btn dark class="cyan" @click="register">
-          Register
-        </v-btn>
-      </v-container>
+          <div class="danger-alert" v-html="error" />
+          <br>
+          <v-btn dark class="cyan" @click="register">
+            Register
+          </v-btn>
+        </v-container>
+      </div>
     </v-flex>
   </v-layout>
+
 </template>
 
 <script>
@@ -29,7 +32,8 @@ export default {
     return {
       username: '',
       password: '',
-      error: null }
+      error: null
+    }
   },
   methods: {
     async register () {
@@ -38,7 +42,9 @@ export default {
           username: this.username,
           password: this.password
         })
-      } catch (err) { this.error = err.response.data.message }
+      } catch (err) {
+        this.error = err.response.data.message
+      }
     }
   }
 
@@ -47,4 +53,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.toolbar {
+  width: 10%;
+}
 </style>

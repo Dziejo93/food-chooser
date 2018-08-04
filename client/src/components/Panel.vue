@@ -1,9 +1,8 @@
-
 <template>
     <v-layout align-center justify-center row fill-height>
         <v-flex xs6>
             <v-toolbar dark color="primary">
-                <v-toolbar-title>Login</v-toolbar-title>
+                <v-toolbar-title>Register</v-toolbar-title>
             </v-toolbar>
             <v-container>
                 <form name="tab-tracker-form" autocomplete="off">
@@ -14,8 +13,8 @@
                 <br>
                 <div class="danger-alert" v-html="error" />
                 <br>
-                <v-btn dark class="cyan" @click="login">
-                    Login
+                <v-btn dark class="cyan" @click="register">
+                    Register
                 </v-btn>
             </v-container>
         </v-flex>
@@ -23,30 +22,8 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
-export default {
-  data () {
-    return {
-      username: '',
-      password: '',
-      error: null }
-  },
-  methods: {
-    async login () {
-      try {
-        const response = await AuthenticationService.login({
-          username: this.username,
-          password: this.password
-        })
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
-      } catch (err) { this.error = err.response.data.message }
-    }
-  }
-
-}
+export default {}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

@@ -3,12 +3,16 @@ const router = express.Router()
 const passport = require('passport')
 
 
-router.get('/',(req,res)=>{
-    res.json({
-       msg : 'hello'
-    })
-})
+router.route('/Users')
+    .get()
+    .post()
 
+
+router.route('/User/:userId')
+    .get()
+    .post()
+    .put()
+    .delete()
 
 
 module.exports = router;

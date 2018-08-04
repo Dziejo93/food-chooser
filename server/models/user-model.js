@@ -6,18 +6,13 @@ const userSchema = new Schema({
     local: {
         username: String,
         password: String,
-        token: {
-            token: String,
-            expiryDate: Date
-        }
+        signed: Date
     },
     google: {
         id: String,
         name: String,
-        token: {
-            token: String,
-            expiryDate: Date
-        }
+        signed: Date
+
     },
 
 })

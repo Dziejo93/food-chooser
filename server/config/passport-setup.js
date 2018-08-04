@@ -64,7 +64,8 @@ passport.use(
                 new User({
                     'google.id': profile.id,
                     'google.token': profile.token,
-                    'google.name': profile.displayName
+                    'google.name': profile.displayName,
+                    'google.signed': new Date().getTime()
                 }).save().then((newUser) => {
                     console.log('new user created' + newUser);
                     done(null, newUser)
@@ -93,6 +94,7 @@ passport.use('local-signup', new LocalStrategy({
                 new User({
                     'local.username': username,
                     'local.password': password,
+                    'local.signed': new Date().getTime()
                 }).save().then((newUser) => {
                     console.log('new user created' + newUser);
                     done(null, newUser)

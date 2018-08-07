@@ -29,6 +29,19 @@ userSchema.pre('save', function (next) {
         })
 })
 
+
+userSchema.pre('update', function (next) {
+    const user = this
+    if (this.isModified('password') || this.isNew)
+        this.hashPassword(user.local.password, function (err, hash) {
+            if (err) {
+                return next(err)
+            }
+            user.local.password = hash
+            next()
+        })
+})
+
 userSchema.methods.hashPassword = function (password, cb) {
     bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS), (err, salt) => {
         if (err) {

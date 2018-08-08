@@ -76,32 +76,31 @@ module.exports = {
     },
 
     putUser: async (req, res, next) => {
-        try {
-            const userUpdate = await User.findByIdAndUpdate(req.params.id, {
-                $set: req.body
-            }, async (err, result) => {
-                console.log(req.body);
 
-                if (err) {
-                    return res.status(404).send({
-                        message: err
-                    })
-                } else if (!result) {
-                    return res.status(404).send({
-                        message: 'no result'
-                    })
-                } else {
-                    return res.status(200).send({
-                        message: 'user updated',
-                        result
-                    })
-                }
-            })
+        const userUpdate = await User.findByIdAndUpdate(req.params.id, {
+            $set: req.body
+        }, async (err, result) => {
+            console.log(req.body);
+
+            if (err) {
+                console.log(err);
+                return res.status(404).send({
+                    message: err
+                })
+            } else if (!result) {
+                console.log('resultchuj');
+                return res.status(404).send({
+                    message: 'no result'
+                })
+            } else {
+                return res.status(200).send({
+                    message: 'user updated',
+                    result
+                })
+            }
+        })
 
 
-        } catch (error) {
-
-        }
     },
 
     deleteUser: async (req, res, next) => {

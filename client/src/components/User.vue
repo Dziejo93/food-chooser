@@ -1,5 +1,7 @@
 <template>
-  <panel title="User"></panel>
+  <panel title="User">
+    <v-text v-if="$store.state.isUserLoggedIn"> zalogowany many</v-text>
+  </panel>
 </template>
 
 <script>

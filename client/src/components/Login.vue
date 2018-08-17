@@ -9,7 +9,7 @@
       <br>
       <div class="danger-alert" v-html="error" />
       <br>
-      <v-btn dark class="cyan" @click="register">
+      <v-btn dark class="cyan" @click="login">
         Login
       </v-btn>
     </v-container>

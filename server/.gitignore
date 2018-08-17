@@ -1,0 +1,4 @@
+/config/keys.js
+.env
+/node_modules
+bash.exe.stackdump

@@ -1,35 +1,35 @@
-
 <template>
-    <v-layout align-center justify-center row fill-height>
-        <v-flex xs6>
-            <v-toolbar dark color="primary">
-                <v-toolbar-title>Login</v-toolbar-title>
-            </v-toolbar>
-            <v-container>
-                <form name="tab-tracker-form" autocomplete="off">
-                    <v-text-field label="Username" outline v-model="username"></v-text-field>
-                    <br>
-                    <v-text-field label="Password" outline type="password" v-model="password" autocomplete="new-password"></v-text-field>
-                </form>
-                <br>
-                <div class="danger-alert" v-html="error" />
-                <br>
-                <v-btn dark class="cyan" @click="login">
-                    Login
-                </v-btn>
-            </v-container>
-        </v-flex>
-    </v-layout>
+  <panel title="Login">
+    <v-container>
+      <form name="tab-tracker-form" autocomplete="off">
+        <v-text-field label="Username" outline v-model="username"></v-text-field>
+        <br>
+        <v-text-field label="Password" outline type="password" v-model="password" autocomplete="new-password"></v-text-field>
+      </form>
+      <br>
+      <div class="danger-alert" v-html="error" />
+      <br>
+      <v-btn dark class="cyan" @click="register">
+        Login
+      </v-btn>
+    </v-container>
+  </panel>
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/templates/Panel'
 export default {
+  components: {
+    Panel
+  },
   data () {
     return {
       username: '',
       password: '',
-      error: null }
+      error: null
+
+    }
   },
   methods: {
     async login () {
@@ -40,7 +40,9 @@ export default {
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
-      } catch (err) { this.error = err.response.data.message }
+      } catch (err) {
+        this.error = err.response.data.message
+      }
     }
   }
 

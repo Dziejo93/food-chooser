@@ -9,15 +9,15 @@ const Bcrypt = require('../helpers/Bcrypt')
 const User = require('../models/user-model')
 
 
-passport.serializeUser((user, done) => {
-    done(null, user.id)
-})
+// passport.serializeUser((user, done) => {
+//     done(null, user.id)
+// })
 
-passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
-        done(null, user)
-    })
-})
+// passport.deserializeUser((id, done) => {
+//     User.findById(id).then((user) => {
+//         done(null, user)
+//     })
+// })
 //TODO:CHANGE PROMISES TO FUCKING ASYNC
 
 // JSON WEB TOKENS STRATEGY
@@ -40,6 +40,7 @@ passport.use(new JwtStrategy({
 
 
 //google strategy
+//TODO:add try catch
 passport.use(
     new GoogleStrategy({
         callbackURL: '/auth/google/redirect',
@@ -47,7 +48,7 @@ passport.use(
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }, async (accesToken, refreshToken, profile, done) => {
         // check if user exists in db
-        User.findOne({
+        const currentUser = await User.findOne({
             'google.id': profile.id
         })
         if (currentUser) {
@@ -57,7 +58,6 @@ passport.use(
 
         } else {
             console.log(profile);
-
             new User({
                 'google.id': profile.id,
                 'google.token': profile.token,
@@ -128,7 +128,6 @@ passport.use('local-login', new LocalStrategy({
         done(null, false, {
             message: 'User not exists'
         })
-
     }
 
 }))

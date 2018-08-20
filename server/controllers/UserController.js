@@ -40,7 +40,6 @@ module.exports = {
         try {
             const findUser = await User.findOne(req.params.username)
             console.log(findUser)
-
             if (!findUser) {
                 const newUser = await new User({
                     "local.username": req.body.username,

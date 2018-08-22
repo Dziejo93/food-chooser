@@ -1,34 +1,38 @@
 <template>
   <panel title="Login">
-    <v-container>
-      <form name="tab-tracker-form" autocomplete="off">
-        <v-text-field label="Username" outline v-model="username"></v-text-field>
-        <br>
-        <v-text-field label="Password" outline type="password" v-model="password" autocomplete="new-password"></v-text-field>
-      </form>
-      <br>
-      <div class="danger-alert" v-html="error" />
-      <br>
-      <v-btn dark class="cyan" @click="login">
-        Login
-      </v-btn>
-    </v-container>
+    <div class="container">
+      <div class="row">
+        <div class="col mx-auto">
+          <form>
+            <div class="form-group">
+              <input type="text" label="username" v-model="username" placeholder="login" class="form-control">
+            </div>
+            <div class="form-group pass_show">
+              <input type="password" label="password" v-model="password" placeholder="password" class="form-control">
+            </div>
+            <div class="danger-alert" v-html="error" /><br>
+            <b-btn @click="login">Login</b-btn>
+          </form>
+        </div>
+      </div>
+    </div>
   </panel>
+
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/templates/Panel'
+import Dialog from '@/components/templates/Dialog'
 export default {
   components: {
-    Panel
+    Panel, Dialog
   },
   data () {
     return {
       username: '',
       password: '',
       error: null
-
     }
   },
   methods: {
@@ -44,6 +48,7 @@ export default {
         this.error = err.response.data.message
       }
     }
+
   }
 
 }

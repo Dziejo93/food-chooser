@@ -1,13 +1,17 @@
 <template>
   <div id="app">
-    <v-app>
-      <page-header />
-      <v-layout>
-        <nav-menu/>
-        <router-view/>
-      </v-layout>
+    <page-header/>
 
-    </v-app>
+    <div id="left" class="row">
+      <div class="col-md-auto border border-primary rounded ">
+
+        <nav-menu/>
+      </div>
+      <main class="col m-2 " role="main">
+        <router-view />
+      </main>
+    </div>
+
   </div>
 </template>
 
@@ -24,17 +28,10 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
 .danger-alert {
   color: red;
 }
+
 .home {
   cursor: pointer;
 }

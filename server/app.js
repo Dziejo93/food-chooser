@@ -49,8 +49,6 @@ mongoose.connect(process.env.DB_URI, () => {
 
 })
 
-//routes
-
 app.use('/api', apiRoutes)
 
 app.use((req, res, next) => {

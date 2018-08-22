@@ -4,7 +4,12 @@ const productSchema = new Schema({
     name: String,
     price: Number,
     description: String,
-    image: String
+    image: String,
+    vendor: {
+        type: Schema.Types.ObjectId,
+        ref: 'restaurant'
+    },
+    createdAt: Date
 
 })
 

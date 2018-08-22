@@ -21,6 +21,7 @@ export default {
   },
   async mounted () {
     this.users = await (UserService.getUsers())
+    //
   }}
 </script>
 

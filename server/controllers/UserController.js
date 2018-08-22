@@ -13,9 +13,9 @@ module.exports = {
                     message: "no users"
                 })
             } else {
-                return res.status(200).send({
+                return res.status(200).send(
                     users
-                })
+                )
             }
         } catch (error) {
             return res.status(404).send({

@@ -9,15 +9,15 @@ const Bcrypt = require('../helpers/Bcrypt')
 const User = require('../models/user-model')
 
 
-// passport.serializeUser((user, done) => {
-//     done(null, user.id)
-// })
+passport.serializeUser((user, done) => {
+    done(null, user.id)
+})
 
-// passport.deserializeUser((id, done) => {
-//     User.findById(id).then((user) => {
-//         done(null, user)
-//     })
-// })
+passport.deserializeUser((id, done) => {
+    User.findById(id).then((user) => {
+        done(null, user)
+    })
+})
 //TODO:CHANGE PROMISES TO FUCKING ASYNC
 
 // JSON WEB TOKENS STRATEGY
@@ -43,7 +43,7 @@ passport.use(new JwtStrategy({
 //TODO:add try catch
 passport.use(
     new GoogleStrategy({
-        callbackURL: '/auth/google/redirect',
+        callbackURL: '/api/google/redirect',
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }, async (accesToken, refreshToken, profile, done) => {

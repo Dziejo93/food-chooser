@@ -13,9 +13,9 @@ module.exports = {
                     message: "no users"
                 })
             } else {
-                return res.status(200).send({
+                return res.status(200).send(
                     users
-                })
+                )
             }
         } catch (error) {
             return res.status(404).send({
@@ -40,7 +40,6 @@ module.exports = {
         try {
             const findUser = await User.findOne(req.params.username)
             console.log(findUser)
-
             if (!findUser) {
                 const newUser = await new User({
                     "local.username": req.body.username,

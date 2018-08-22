@@ -7,9 +7,6 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const flash = require('connect-flash')
 const morgan = require('morgan')
-const routes = require('./routes/index');
-const authRoutes = require('./routes/auth-routes')
-const profileRoutes = require('./routes/profile-routes')
 const apiRoutes = require('./routes/api/api-routes')
 const passportSetup = require('./config/passport-setup')
 const passport = require('passport')
@@ -53,9 +50,6 @@ mongoose.connect(process.env.DB_URI, () => {
 })
 
 //routes
-app.use('/', routes)
-app.use('/auth', authRoutes)
-app.use('/profile', profileRoutes)
 app.use('/api', apiRoutes)
 
 app.use((req, res, next) => {

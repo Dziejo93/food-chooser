@@ -1,26 +1,14 @@
 <template>
-    <v-toolbar dark color=light-blue darken-1>
-        <v-toolbar-items>
-            <v-btn flat dark @click="navigateTo('root')"> totalnie</v-btn>
-        </v-toolbar-items>
+    <div>
+        <b-navbar id="header" type="dark" variant="primary" toggleable>
+            <b-navbar-nav>
+                <b-nav-item v-if="!$store.state.isUserLoggedIn" :to="{name:'register'}">Register</b-nav-item>
+                <b-nav-item v-if="!$store.state.isUserLoggedIn" :to="{name:'login'}">Login</b-nav-item>
+                <b-nav-item v-if="$store.state.isUserLoggedIn" @click="logOut">Log Out</b-nav-item>
+            </b-navbar-nav>
 
-        <v-toolbar-title class="white--text">food-chooser</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-        <!--Change this m8-->
-        <v-toolbar-items>
-            <v-btn v-if="!$store.state.isUserLoggedIn" flat dark :to="{name:'register'}">
-                Sign up
-            </v-btn>
-            <v-btn v-if="!$store.state.isUserLoggedIn" flat dark :to="{name:'login'}">
-                Login
-            </v-btn>
-            <v-btn v-if="$store.state.isUserLoggedIn" flat dark @click="logOut">
-                LogOut
-            </v-btn>
-        </v-toolbar-items>
-
-    </v-toolbar>
+        </b-navbar>
+    </div>
 </template>
 
 <script>
@@ -37,7 +25,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.v-toolbar {
-  color: rgb(83, 153, 51);
+#header {
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 6px -6px #999;
 }
 </style>

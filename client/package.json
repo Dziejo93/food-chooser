@@ -14,9 +14,17 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.2.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.2",
+    "@fortawesome/free-solid-svg-icons": "^5.2.0",
+    "@fortawesome/vue-fontawesome": "^0.1.1",
     "axios": "^0.18.0",
+    "bootstrap-vue": "^2.0.0-rc.11",
     "eslint": "^5.2.0",
+    "i": "^0.3.6",
+    "npm": "^6.4.0",
     "vue": "^2.5.2",
+    "vue-material-design-icons": "^2.0.0",
     "vue-router": "^3.0.1",
     "vuetify": "^1.1.9",
     "vuex": "^3.0.1",

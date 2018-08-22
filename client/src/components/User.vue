@@ -1,14 +1,27 @@
 <template>
   <panel title="User">
-    <v-text v-if="$store.state.isUserLoggedIn"> zalogowany many</v-text>
+    <div v-for="user in users.data" :key="user._id">
+      <div v-if="user.local">{{user.local}}</div>
+      <div v-else-if="user.google">{{user.google}}</div>
+    </div>
   </panel>
 </template>
 
 <script>
 import Panel from '@/components/templates/Panel'
+import UserService from '@/services/UserService'
 export default {
-  components: { Panel }
-}
+  components: {
+    Panel
+  },
+  data () {
+    return {
+      users: null
+    }
+  },
+  async mounted () {
+    this.users = await (UserService.getUsers())
+  }}
 </script>
 
 <style scoped>

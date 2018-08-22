@@ -1,10 +1,10 @@
-import Auth from '@/services/Auth'
+import Api from '@/services/Api'
 
 export default {
   register (credentials) {
-    return Auth().post('register', credentials)
+    return Api().post('register', credentials)
   },
   login (credentials) {
-    return Auth().post('login', credentials)
+    return Api().post('login', credentials)
   }
 }

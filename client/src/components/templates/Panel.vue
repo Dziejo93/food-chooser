@@ -1,14 +1,13 @@
 <template>
-  <v-layout align-space-between justify-center>
-    <v-flex xs6>
-      <div class="white elevation-2" align-center justify-center>
-        <v-toolbar dark color=light-blue darken-1>
-          <v-toolbar-title>{{title}}</v-toolbar-title>
-        </v-toolbar>
-        <slot>No content</slot>
-      </div>
-    </v-flex>
-  </v-layout>
+
+  <div class="card  shadow center-block m-auto ">
+    <div class="card-header" justify-content-center>
+      <h4 class="lead">{{title}}</h4>
+    </div>
+    <div class="card-body">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -20,7 +19,14 @@ export default {
 </script>
 
 <style scoped>
-.toolbar {
-  width: 10%;
+.card {
+  box-shadow: 10;
+  width: 50%;
+}
+.card-header {
+  text-align: center;
+  color: white;
+  background-color: #007bff;
+  flood-color: aqua;
 }
 </style>

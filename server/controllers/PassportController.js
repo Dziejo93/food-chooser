@@ -13,19 +13,6 @@ signToken = user => {
 }
 
 module.exports = {
-    login: async (req, res, next) => {
-        res.render('login')
-    },
-
-    //auth logout
-    logout: async (req, res, next) => {
-        req.logout()
-        res.redirect('/')
-    },
-
-    register: async (req, res) => {
-        res.render('register')
-    },
 
     ////////////////////Local strategies///////////////////////////////
 

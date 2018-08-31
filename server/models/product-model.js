@@ -5,7 +5,7 @@ const productSchema = new Schema({
     price: Number,
     description: String,
     image: String,
-    vendor: {
+    vendors: {
         type: Schema.Types.ObjectId,
         ref: 'restaurant'
     },

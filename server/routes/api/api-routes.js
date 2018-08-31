@@ -3,15 +3,16 @@ const router = express.Router()
 const passport = require('passport')
 const UserController = require('../../controllers/UserController')
 const PassportController = require('../../controllers/PassportController')
+const ProductController = require('../../controllers/ProductController')
+const RestaurantController = require('../../controllers/RestaurantController')
 
 ///auth routes
 router.route('/login')
-    .get(PassportController.login)
+
     .post(...PassportController.localLogin)
 
 
 router.route('/register')
-    .get(PassportController.register)
     .post(PassportController.localSignUp)
 
 
@@ -24,11 +25,6 @@ router.route('/google')
 router.route('/google/redirect')
     .get(...PassportController.googleRedir)
 
-
-router.route('/logout')
-    .get(PassportController.logout)
-
-
 //user routes
 
 router.route('/users')
@@ -39,11 +35,30 @@ router.route('/users')
 
 router.route('/users/:id')
     .get(UserController.getUser)
-    .post(UserController.postUser)
     .put(UserController.putUser)
     .delete(UserController.deleteUser)
 
+//product routes
+router.route('/products')
+    .get(ProductController.getProducts)
+    .post(ProductController.postProduct)
+    .delete(ProductController.deleteProducts)
 
-router.rout
+router.route('/products/:id')
+    .get(ProductController.getProduct)
+    .put(ProductController.updateProduct)
+    .delete(ProductController.deleteProduct)
+
+
+//restaurants routes
+router.route('/restaurants')
+    .get(RestaurantController.getRestaurants)
+    .post(RestaurantController.postRestaurant)
+    .delete(RestaurantController.deleteRestaurants)
+
+router.route('/restaurants/:id')
+    .get(RestaurantController.getRestaurant)
+    .put(RestaurantController.updateRestaurant)
+    .delete(RestaurantController.deleteRestaurant)
 
 module.exports = router;

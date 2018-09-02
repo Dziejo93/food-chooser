@@ -1,6 +1,6 @@
 <template>
   <panel title="User">
-    <div v-for="user in users.data" :key="user._id">
+    <div v-for="user in users.data.users" :key="user">
       <div v-if="user.local">{{user.local}}</div>
       <div v-else-if="user.google">{{user.google}}</div>
     </div>
@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      users: null
+      users: {}
     }
   },
   async mounted () {

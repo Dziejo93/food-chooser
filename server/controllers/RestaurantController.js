@@ -1,6 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
-
+const Restaurant = require("../models/restaurant-model")
 
 module.exports = {
 	getRestaurants: async (req, res, next) => {

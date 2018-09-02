@@ -4,7 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import User from '@/components/Users/User'
-import Restaurant from '@/components/Restaurants/Restaurant'
+import RestaurantsIndex from '@/components/Restaurants/RestaurantsIndex'
+import ViewRestaurant from '@/components/Restaurants/ViewRestaurant'
 Vue.use(Router)
 
 export default new Router({
@@ -13,7 +14,6 @@ export default new Router({
     name: 'HelloWorld',
     component: HelloWorld
   },
-
   {
     path: '/register',
     name: 'register',
@@ -28,9 +28,13 @@ export default new Router({
     name: 'user',
     component: User
   }, {
-    path: '/restaurant',
+    path: '/restaurants',
+    name: 'restaurants',
+    component: RestaurantsIndex
+  }, {
+    path: '/restaurants/:restaurantId',
     name: 'restaurant',
-    component: Restaurant
+    component: ViewRestaurant
   }
 
   ]

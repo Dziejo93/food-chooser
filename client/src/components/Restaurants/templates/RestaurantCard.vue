@@ -3,7 +3,6 @@
         <div class="card flex-row flex-wrap">
             <div class="card-header border-0 flex-auto">
                 <slot name="card-image"></slot>
-
             </div>
             <div class="card-block px-2">
                 <h4 class="card-title">
@@ -12,7 +11,7 @@
                 <p class="card-text">
                     <slot name="card-body"></slot>
                 </p>
-                <a href="#" class="btn btn-primary">Browse</a>
+                <div class="btn btn-primary">Browse </div>
             </div>
 
         </div>
@@ -26,18 +25,13 @@ export default {
 </script>
 
 <style scoped>
-.btn {
-  position: absolute;
+.container .btn {
   right: 0;
   bottom: 0;
-  margin-block-end: 1%;
-  margin-right: 1%;
+  position: absolute;
 }
 
 .card-image {
   float: left;
-
-  width: 25%;
-  height: 150px;
 }
 </style>

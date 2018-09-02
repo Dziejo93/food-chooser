@@ -1,21 +1,14 @@
 <template>
   <panel title="Restaurant">
-    <div v-for="restaurant in restaurants.data.restaurants" :key="restaurant._id">
+    <div v-for="restaurant in restaurants" :key="restaurant._id">
       <restaurant-card>
         <template slot="card-title">{{restaurant.name}}</template>
         <template slot="card-image">
           <img class="album-image" v-if="restaurant.logoUrl" :src="restaurant.logoUrl" />
           <img class="album-image" v-if="!restaurant.logoUrl" src="//placehold.it/200" />
         </template>
-        <template slot="card-body">{{restaurant.name}}</template>
+        <template slot="card-body">{{restaurant.description}}</template>
       </restaurant-card>
-
-      <!-- <tr class='clickable-row'>
-        <td> {{ restaurant._id }}</td>
-        <td>{{ restaurant.name }}</td>
-        <td></td>
-      </tr> -->
-
     </div>
   </panel>
 </template>
@@ -35,7 +28,8 @@ export default {
     }
   },
   async mounted () {
-    this.restaurants = await (RestaurantService.getRestaurants())
+    const restaurantsResponse = await (RestaurantService.getRestaurants())
+    this.restaurants = restaurantsResponse.data.restaurants
   }
 }
 </script>

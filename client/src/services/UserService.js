@@ -1,7 +1,7 @@
 import Api from '@/services/Api'
 
 export default {
-  getUsers () {
+  getUsers() {
     return Api().get('users')
   }
 

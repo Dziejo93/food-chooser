@@ -1,1 +1,2 @@
-declare module '@fortawesome/vue-fontawesome'
+declare module '@fortawesome/*';
+declare module 'vue-google-signin-button'

@@ -2,16 +2,16 @@
   <panel title="Add restaurant">
     <div>
       <b-form>
-        <b-form-group 
-          id="name" 
-          :label-cols="4" 
-          horizontal 
-          breakpoint="md" 
-          description="Enter the name of Your restaurant." 
-          label="Enter the name here" 
+        <b-form-group
+          id="name"
+          :label-cols="4"
+          horizontal
+          breakpoint="md"
+          description="Enter the name of Your restaurant."
+          label="Enter the name here"
           label-for="inputHorizontal">
-          <b-form-input 
-            id="name" 
+          <b-form-input
+            id="name"
             v-model.trim="name"
             required />
         </b-form-group>
@@ -28,16 +28,16 @@
             v-model.trim="adress"
             required />
         </b-form-group>
-        <b-form-group 
-          id="description" 
-          :label-cols="4" 
-          horizontal 
-          breakpoint="md" 
-          description="Enter the description for Your restaurant." 
+        <b-form-group
+          id="description"
+          :label-cols="4"
+          horizontal
+          breakpoint="md"
+          description="Enter the description for Your restaurant."
           label="Enter the description here"
           label-for="inputHorizontal">
-          <b-form-textarea 
-            id="description" 
+          <b-form-textarea
+            id="description"
             v-model="text"
             :rows="3"
             :max-rows="6"
@@ -57,7 +57,7 @@
             v-model.trim="logoURl"
             required />
         </b-form-group>
-        <b-button 
+        <b-button
           type="submit"
           variant="primary">Submit</b-button>
       </b-form>
@@ -72,16 +72,16 @@ export default {
   components: {
     Panel
   },
-  data() {
+  data () {
     return {
       name: '',
       adress: '',
       description: ''
     }
   },
- methods:{
+  methods: {
 
- }
+  }
 }
 </script>
 

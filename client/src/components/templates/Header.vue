@@ -1,19 +1,19 @@
 <template>
-  <b-navbar 
-    id="header" 
-    type="dark" 
-    variant="primary" 
-    toggleable 
+  <b-navbar
+    id="header"
+    type="dark"
+    variant="primary"
+    toggleable
     sticky="True">
     <b-navbar-nav>
-      <b-nav-item 
-        v-if="!$store.state.isUserLoggedIn" 
+      <b-nav-item
+        v-if="!$store.state.isUserLoggedIn"
         :to="{name:'register'}">Register</b-nav-item>
-      <b-nav-item 
-        v-if="!$store.state.isUserLoggedIn" 
+      <b-nav-item
+        v-if="!$store.state.isUserLoggedIn"
         :to="{name:'login'}">Login</b-nav-item>
-      <b-nav-item 
-        v-if="$store.state.isUserLoggedIn" 
+      <b-nav-item
+        v-if="$store.state.isUserLoggedIn"
         @click="logOut">Log Out</b-nav-item>
     </b-navbar-nav>
 
@@ -23,7 +23,7 @@
 <script>
 export default {
   methods: {
-    logOut() {
+    logOut () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({

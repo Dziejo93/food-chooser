@@ -5,12 +5,24 @@
         <div class="col mx-auto">
           <form>
             <div class="form-group">
-              <input type="text" label="username" v-model="username" placeholder="login" class="form-control">
+              <input
+                v-model="username"
+                type="text"
+                label="username"
+                placeholder="login"
+                class="form-control">
             </div>
             <div class="form-group pass_show">
-              <input type="password" label="password" v-model="password" placeholder="password" class="form-control">
+              <input
+                v-model="password"
+                type="password"
+                label="password"
+                placeholder="password"
+                class="form-control">
             </div>
-            <div class="danger-alert" v-html="error" /><br>
+            <div
+              class="danger-alert"
+              v-html="error" /><br>
             <b-btn @click="register">Register</b-btn>
           </form>
         </div>
@@ -22,29 +34,30 @@
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/templates/Panel'
-export default { components: {
-  Panel
-},
-data () {
-  return {
-    username: '',
-    password: '',
-    error: null
-  }
-},
-methods: {
-  async register () {
-    try {
-      await AuthenticationService.register({
-        username: this.username,
-        password: this.password
-      })
-      // if(response.data.message)
-    } catch (err) {
-      this.error = err.response.data.message
+export default {
+  components: {
+    Panel
+  },
+  data () {
+    return {
+      username: '',
+      password: '',
+      error: null
+    }
+  },
+  methods: {
+    async register () {
+      try {
+        await AuthenticationService.register({
+          username: this.username,
+          password: this.password
+        })
+        // if(response.data.message)
+      } catch (err) {
+        this.error = err.response.data.message
+      }
     }
   }
-}
 
 }
 </script>

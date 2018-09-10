@@ -60,15 +60,31 @@ module.exports = {
 	],
 
 	////////////////////////Google strategies////////////////////////////
-	googleLogin: async (req, res, next) => {},
+	googleLogin: async (req, res, next) => {
+		passport.authenticate("googleProfile-strategy",	async(err,user)=>{
+			if(err){
+				res.status(422).send({
+					message: err
+				})}
+			else{
+				const token = await signToken(user)
+				res.status(200).send({
+					user: user,
+					token: token
+				})
 
-	googleRedir: [
-		passport.authenticate("google"),
-		(req, res) => {
-			const token = signToken(req.user)
-			res.status(200).json({
-				token
-			})
-		}
-	]
+			}
+		})(req, res, next)
+
+	},
+
+	// googleRedir: [
+	// 	passport.authenticate("google"),
+	// 	(req, res) => {
+	// 		const token = signToken(req.user)
+	// 		res.status(200).json({
+	// 			token
+	// 		})
+	// 	}
+	// ]
 }

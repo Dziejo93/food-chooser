@@ -2,9 +2,11 @@ const passport = require("passport")
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy
 const LocalStrategy = require("passport-local").Strategy
 const JwtStrategy = require("passport-jwt").Strategy
+const CustomStrategy = require("passport-custom")
 const {
 	ExtractJwt
 } = require("passport-jwt")
+
 const Bcrypt = require("../helpers/Bcrypt")
 const User = require("../models/user-model")
 
@@ -28,14 +30,40 @@ passport.use(new JwtStrategy({
 	try {
 		// Find the user specified in token
 		const user = await User.findById(payload.sub)
-        if (!user) {
+		if (!user) {
 			return done(null, false)
-        }
+		}
 		done(null, user)
-    } catch (error) {
+	} catch (error) {
 		done(error, false)
-    }
+	}
 }))
+
+
+
+
+passport.use("googleProfile-strategy", new CustomStrategy(
+	async(req, done)=> {
+		const googleUser = await User.findOne({
+			"google.id":req.body.Eea
+		})
+		if(googleUser){
+			console.log("user is", googleUser)
+			done(null, googleUser)}
+		else{
+			const newGoogleUser =await new User({
+				"google.id": req.body.Eea,
+				"google.name": req.body.U3,
+				"google.signed": new Date().getTime(),
+				"google.updatedAt": new Date().getTime()
+			}).save()
+			done(null,newGoogleUser)
+		}
+
+	}
+))
+
+
 
 //google strategy
 //TODO:add try catch
@@ -56,14 +84,14 @@ passport.use(
 
 		} else {
 			console.log(profile)
-            new User({
+			new User({
 				"google.id": profile.id,
 				"google.token": profile.token,
 				"google.name": profile.displayName,
 				"google.signed": new Date().getTime()
 			}).save().then((newUser) => {
 				console.log("new user created" + newUser)
-                done(null, newUser)
+				done(null, newUser)
 			})
 		}
 
@@ -87,13 +115,13 @@ async (req, username, password, done) => {
 	} else {
 		const hash = await Bcrypt.getHash(password)
 		console.log(hash)
-            new User({
+		new User({
 			"local.username": username,
 			"local.password": hash,
 			"local.signed": new Date().getTime()
 		}).save().then((newUser) => {
 			console.log("new user created" + newUser)
-                done(null, newUser)
+			done(null, newUser)
 		})
 	}
 
@@ -115,7 +143,7 @@ passport.use("local-login", new LocalStrategy({
 		const res = await Bcrypt.comparePass(password, currentUser.local.password)
 		if (res) {
 			console.log("user is" + currentUser)
-            done(null, currentUser)
+			done(null, currentUser)
 		} else {
 			req.authError = "Wrong Password"
 			done(null, false, {

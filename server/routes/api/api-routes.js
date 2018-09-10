@@ -5,6 +5,7 @@ const UserController = require("../../controllers/UserController")
 const PassportController = require("../../controllers/PassportController")
 const ProductController = require("../../controllers/ProductController")
 const RestaurantController = require("../../controllers/RestaurantController")
+const GoogleAuthController = require("../../controllers/GoogleAuthController")
 
 ///auth routes
 router.route("/login")
@@ -17,13 +18,17 @@ router.route("/register")
 
 
 router.route("/google")
-	.get(passport.authenticate("google", {
-		scope: ["profile"]
-	}), PassportController.googleLogin)
+	.post(PassportController.googleLogin)
+	.get(GoogleAuthController.getGoogleUrl)
+
+// router.route("/google")
+// 	.get(passport.authenticate("google", {
+// 		scope: ["profile"]
+// 	}), PassportController.googleLogin)
 
 
-router.route("/google/redirect")
-	.get(...PassportController.googleRedir)
+// router.route("/google/redirect")
+// 	.get(...PassportController.googleRedir)
 
 //user routes
 

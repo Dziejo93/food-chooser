@@ -19,7 +19,7 @@ module.exports = {
 		} catch (error) {
 			return res.status(404).send({
 				message: "error"
-			})
+			}), next()
 		}
 	},
 	deleteProducts: async (req, res, next) => {
@@ -159,8 +159,11 @@ module.exports = {
 						message: "product not found"
 					})
 				} else {
+					console.log(restaurant)
+					await restaurant.products.push(result)
+					await restaurant.save()
 					return res.status(200).send({
-						message: "user updated successfully",
+						message: "product updated successfully",
 						result
 					})
 				}

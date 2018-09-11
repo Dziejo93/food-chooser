@@ -1,9 +1,9 @@
-import { google } from "googleapis"
+const{ google } =require("googleapis")
 
 const googleConfig = {
-	clientId: process.env.GOOGLE_CLIENT_ID,
-	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-	redirect: "http://localhost:8080/google"
+	clientId: "849297888360-361v6kc69bl1eq1i3a0hrinphdcuq3sg.apps.googleusercontent.com",
+	clientSecret: "ERaKmPZAp8Rpw4JSWRsuNh5p",
+	redirect: "http://127.0.0.1:3000/api/google"
 }
 const defaultScope = [
 	"https://www.googleapis.com/auth/plus.me",
@@ -17,7 +17,7 @@ async function createConnection() {
 		googleConfig.redirect
 	)
 }
-  
+
 async function getConnectionUrl(auth) {
 	return auth.generateAuthUrl({
 		access_type: "offline",
@@ -25,7 +25,7 @@ async function getConnectionUrl(auth) {
 		scope: defaultScope
 	})
 }
-  
+
 async  function getGooglePlusApi(auth) {
 	return google.plus({ version: "v1", auth })
 }
@@ -36,7 +36,6 @@ async function urlGoogle() {
 }
 
 async function getGoogleAccountFromCode(code)  {
-
 	const data = await auth.getToken(code)
 	const tokens = await data.tokens
 	const auth =await  createConnection()
@@ -52,7 +51,7 @@ async function getGoogleAccountFromCode(code)  {
 	}
 }
 
-module.exports= {
+module.exports= {google,
 	googleConfig,
 	defaultScope,
 	urlGoogle,

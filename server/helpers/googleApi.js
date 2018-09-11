@@ -1,9 +1,9 @@
-const  { google }=require("googleapis")
+import { google } from "googleapis"
 
 const googleConfig = {
 	clientId: process.env.GOOGLE_CLIENT_ID,
 	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-	redirect: "http://localhost:8080/"
+	redirect: "http://localhost:8080/google"
 }
 const defaultScope = [
 	"https://www.googleapis.com/auth/plus.me",
@@ -36,6 +36,7 @@ async function urlGoogle() {
 }
 
 async function getGoogleAccountFromCode(code)  {
+
 	const data = await auth.getToken(code)
 	const tokens = await data.tokens
 	const auth =await  createConnection()
@@ -51,7 +52,8 @@ async function getGoogleAccountFromCode(code)  {
 	}
 }
 
-module.exports= {googleConfig,
+module.exports= {
+	googleConfig,
 	defaultScope,
 	urlGoogle,
 	getGooglePlusApi,

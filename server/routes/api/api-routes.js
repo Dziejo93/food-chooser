@@ -18,7 +18,7 @@ router.route("/register")
 
 
 router.route("/google")
-	.post(PassportController.googleLogin)
+	.post(GoogleAuthController.postGoogleCode)
 	.get(GoogleAuthController.getGoogleUrl)
 
 // router.route("/google")

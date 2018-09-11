@@ -20,7 +20,8 @@ export default {
        */
       googleSignInParams: {
         client_id:
-          '849297888360-361v6kc69bl1eq1i3a0hrinphdcuq3sg.apps.googleusercontent.com'
+          '849297888360-361v6kc69bl1eq1i3a0hrinphdcuq3sg.apps.googleusercontent.com',
+        scope: 'profile'
       }
     }
   },
@@ -38,6 +39,7 @@ export default {
       // See https://developers.google.com/identity/sign-in/web/reference#users
       const profile = googleUser.getBasicProfile() // etc etc
       console.log(profile)
+
     },
     onSignInError (error) {
       // `error` contains any error occurred.
@@ -56,5 +58,6 @@ export default {
   background-color: #3c82f7;
   color: #fff;
   box-shadow: 0 3px 0 #0f69ff;
+  cursor: pointer;
 }
 </style>

@@ -24,7 +24,7 @@
               class="danger-alert"
               v-html="error" /><br>
             <b-btn @click="login">Login</b-btn>
-            <google-login-button/>
+            <b-btn @click="getUrl">Get url</b-btn>
 
           </form>
         </div>
@@ -34,10 +34,10 @@
 </template>
 
 <script>
-import GoogleLoginButton from '@/components/templates/GoogleLoginButton';
-import AuthenticationService from '@/services/AuthenticationService';
-import Panel from '@/components/templates/Panel';
-import Dialog from '@/components/templates/Dialog';
+import GoogleLoginButton from '@/components/templates/GoogleLoginButton'
+import AuthenticationService from '@/services/AuthenticationService'
+import Panel from '@/components/templates/Panel'
+import Dialog from '@/components/templates/Dialog'
 export default {
   components: {
     Panel,
@@ -63,20 +63,20 @@ export default {
       } catch (err) {
         this.error = err.response.data.message
       }
+    },
+    async getUrl () {
+      try {
+        const url = await AuthenticationService.getGoogleUrl()
+        console.log(url.data)
+        window.location.href = url.data
+      } catch (error) {
+
+      }
     }
   }
 }
 </script>
 
-<!-- Add "
-              attribute
-              to
-              limit
-              css
-              to
-              this
-              component
-              only
-              -->
 <style scoped>
+
 </style>

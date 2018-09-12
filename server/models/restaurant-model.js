@@ -9,9 +9,8 @@ const restaurantSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: "product"
 	}],
-	createdAt: Date,
-	updatedAt: Date
-})
+
+},{timestamps:true})
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema)
 module.exports = Restaurant

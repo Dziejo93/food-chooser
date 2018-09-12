@@ -4,9 +4,9 @@ const orderSchema = new Schema({
 	issued: new Date().getDate(),
 	products: {},
 	completed: Date,
-	updatedAt: Date
 
-})
+
+},{timestamps:true})
 
 const Order = mongoose.model("Order", orderSchema)
 module.exports = Order

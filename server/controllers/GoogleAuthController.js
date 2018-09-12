@@ -1,7 +1,6 @@
 const User = require("../models/user-model")
 const JWT = require("jsonwebtoken")
 const GoogleApi = require("../helpers/googleApi")
-
 const {
 	google
 } = require("googleapis")
@@ -37,58 +36,54 @@ signToken = user => {
 module.exports = {
 
 	getGoogleUrl: async (req, res, next) => {
-
 		if (url) {
 			res.status(200).send(url)
 		} else {
 			res.status(404).send({
-				message: "error"
+				message: "error with creating url"
 			})
 			next()
 		}
 	},
 
 	postGoogleCode: async (req, res, next) => {
+		//beautify code
 		const code = req.body.googleCode
-		console.log(code)
-
 		oauth2Client.getToken(code, async (err, tokens) => {
 			if (err) {
-				console.log("dupa", err)
 				res.status(404).send({
 					message: "err"
 				})
+				next()
 			} else {
-
 				oauth2Client.setCredentials(tokens)
+				plus.people.get({
+					userId: "me",
+					auth: oauth2Client
+				}, async (err, response) => {
+					if (err) {
+						res.status(404).send(err)
+						next()
+					} else {
+						const googleData= response.data
+						const currentUser = await User.findOne({
+							"google.id": googleData.id
+						})
+						if (currentUser) {
+							const token = await signToken(currentUser)
+							res.status(200).send(currentUser,token)
+						} else {
+							const newUser = await new User({
+								"google.id": googleData.id,
+								"google.name": googleData.emails[0].value,
+							}).save()
+							const token = await signToken(newUser)
+							res.status(200).send({message:"new user created",newUser,token})
+						}
 
-				plus.people.get({userId:"me",auth:oauth2Client},async(err,response)=>{
-					if(err){console.log(err)
-					}else{
-						console.log(response)
 
 					}
 				})
-				console.log(tokens.access_token)
-
-
-				res.status(200).send({
-					tokens
-				})
-				//  oauth2Client.setCredentials({access_token:tokens.access_token})
-
-				// const me = await plus.people.get({ userId: "me" })
-				// console.log(me)
-
-				// const userGoogleId = me.data.id
-				// const userGoogleEmail = me.data.emails && me.data.emails.length && me.data.emails[0].value
-
-				// res.status(200).send({
-				// 	id:userGoogleId,
-				// 	gmail:userGoogleEmail,
-				// 	tokens:tokens})}
-
-
 			}
 		})
 	}

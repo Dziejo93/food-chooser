@@ -9,7 +9,7 @@
     src="https://picsum.photos/250/250/?image=54"
     class="m-1" />
     <h1><slot name="name"/></h1>
-    <v-expansion-panel><slot name="createdAt"/></v-expansion-panel>
+    <h2><slot name="createdAt"/></h2>
     <slot name="affiliation"/>
   </b-container>
 </template>

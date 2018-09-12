@@ -8,6 +8,7 @@ import RestaurantsIndex from '@/components/Restaurants/RestaurantsIndex'
 import ViewRestaurant from '@/components/Restaurants/ViewRestaurant'
 import AddRestaurant from '@/components/Restaurants/AddRestaurant'
 import GoogleLogin from '@/components/Authorisation/GoogleLogin'
+import EditRestaurant from '@/components/Restaurants/EditRestaurant'
 Vue.use(Router)
 
 export default new Router({
@@ -25,7 +26,9 @@ export default new Router({
     path: '/login',
     name: 'login',
     component: Login
-  },
+  }, { path: '/google',
+    name: 'google-login',
+    component: GoogleLogin },
   {
     path: '/user',
     name: 'user',
@@ -37,14 +40,18 @@ export default new Router({
   }, {
     path: '/restaurants/:restaurantId',
     name: 'restaurant',
-    component: ViewRestaurant
+    component: ViewRestaurant,
+    props: true
   }, {
     path: '/restaurants/add-restaurant',
     name: 'add-restaurant',
     component: AddRestaurant
-  }, { path: '/google',
-    name: 'google-login',
-    component: GoogleLogin }
+  }, {
+    path: '/restaurants/:restaurantId',
+    name: 'edit-restaurant',
+    component: EditRestaurant,
+    props: true
+  }
 
   ]
 })

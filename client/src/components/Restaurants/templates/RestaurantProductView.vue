@@ -16,22 +16,14 @@
 
     </div>
   </div>
-</template>
 
+  <slot/>
+</template>
 <script>
 export default {
 
 }
 </script>
-
 <style scoped>
-.container .btn {
-  right: 0;
-  bottom: 0;
-  position: absolute;
-}
 
-.card-image {
-  float: left;
-}
 </style>

@@ -1,6 +1,10 @@
 <template>
-  <panel :title="restaurant.name">
-    <slot>{{ restaurant.name }}</slot>
+
+  <panel :title="restaurant.name" >
+    <div
+      v-for="product in restaurant.products"
+      :key="product.id"><template name="card-title" >{{ product.name }}</template></div>
+
   </panel>
 </template>
 
@@ -12,12 +16,12 @@ export default {
   components: {
     Panel
   },
-  data() {
+  data () {
     return {
       restaurant: {}
     }
   },
-  async mounted() {
+  async mounted () {
     const restaurantId = this.$store.state.route.params.restaurantId
     const restaurantResponse = await RestaurantService.getRestaurant(restaurantId)
     this.restaurant = restaurantResponse.data.restaurant

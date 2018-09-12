@@ -52,6 +52,7 @@ module.exports = {
 						name: req.body.name,
 						price: req.body.price,
 						description: req.body.description,
+						quantity:req.body.quantity,
 						image: req.body.imageUrl,
 						createdAt: new Date().getTime()
 					}).save()

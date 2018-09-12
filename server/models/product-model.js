@@ -4,6 +4,7 @@ const productSchema = new Schema({
 	name: String,
 	price: Number,
 	description: String,
+	quantity:Number,
 	image: String,
 	vendor: {
 		type: Schema.Types.ObjectId,

@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Register from '@/components/Register'
+import Register from '@/components/Authorisation/Register'
 import Login from '@/components/Authorisation/Login'
-import User from '@/components/Users/User'
+import Profile from '@/components/Users/Profile'
 import RestaurantsIndex from '@/components/Restaurants/RestaurantsIndex'
 import ViewRestaurant from '@/components/Restaurants/ViewRestaurant'
 import AddRestaurant from '@/components/Restaurants/AddRestaurant'
@@ -29,7 +29,7 @@ export default new Router({
   {
     path: '/user',
     name: 'user',
-    component: User
+    component: Profile
   }, {
     path: '/restaurants',
     name: 'restaurants',

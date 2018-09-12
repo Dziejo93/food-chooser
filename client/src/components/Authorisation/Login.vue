@@ -24,8 +24,7 @@
               class="danger-alert"
               v-html="error" /><br>
             <b-btn @click="login">Login</b-btn>
-            <b-btn @click="getUrl">Get url</b-btn>
-
+            <b-btn @click="getUrl">Google</b-btn>
           </form>
         </div>
       </div>

@@ -11,12 +11,20 @@ export default {
     }
   },
   async mounted () {
-    const code = await this.$route.query.code
+    try {
+      const code = await this.$route.query.code
+      console.log(code)
+      const response = await AuthenticationService.postGoogleCode({ googleCode: code })
+      if (response.data) {
+        console.log(response.data)
 
-    console.log(code)
-    const response = AuthenticationService.postGoogleCode({ googleCode: code })
-  }
-}
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.currentUser._id)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  } }
 </script>
 <style scoped>
 

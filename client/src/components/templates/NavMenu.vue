@@ -1,31 +1,48 @@
 <template>
   <div id="wrapper">
     <div id="sidebar-wrapper">
-      <li class="nav-item" v-b-toggle.restaurant-collapse variant="primary">
+      <li
+        v-b-toggle.restaurant-collapse
+        class="nav-item"
+        variant="primary">
         <!-- restaurant collapse -->
         <b-nav-item active>
-          <i id="icons" class="fas fa-utensils"></i>
+          <i
+            id="icons"
+            class="fas fa-utensils"/>
           <b-nav-text>Restaurants</b-nav-text>
-          <i id="header-icon" class="fas fa-angle-down"></i>
+          <i
+            id="header-icon"
+            class="fas fa-angle-down"/>
         </b-nav-item>
       </li>
-      <b-collapse id="restaurant-collapse" class="m-auto">
+      <b-collapse
+        id="restaurant-collapse"
+        class="m-auto">
         <ul class="list-unstyled">
           <li class="nav-item ">
-            <b-nav-item variant="primary" active>
-              <i id="icons" class="fas fa-shopping-cart"></i>
+            <b-nav-item
+              variant="primary"
+              active>
+              <i
+                id="icons"
+                class="fas fa-shopping-cart"/>
               <b-link :to="{name:'restaurants'}">Browse restaurants</b-link>
             </b-nav-item>
           </li>
           <li class="nav-item">
             <b-nav-item active>
-              <i id="icons" class="fas fa-cart-plus"></i>
+              <i
+                id="icons"
+                class="fas fa-cart-plus"/>
               <b-link :to="{name:'add-restaurant'}">Add restaurant</b-link>
             </b-nav-item>
           </li>
           <li class="nav-item">
             <b-nav-item active>
-              <i id="icons" class="fas fa-edit"></i>
+              <i
+                id="icons"
+                class="fas fa-edit"/>
               <b-link :to="{name:'edit-restaurant'}">Edit restaurant</b-link>
             </b-nav-item>
           </li>
@@ -33,54 +50,87 @@
       </b-collapse>
       <!-- restuarant end -->
       <!-- orders start -->
-      <li class="nav-item" v-b-toggle.order-collapse variant="primary">
+      <li
+        v-b-toggle.order-collapse
+        class="nav-item"
+        variant="primary">
         <b-nav-item active>
-          <i id="icons" class="fas fa-shopping-cart"></i>
+          <i
+            id="icons"
+            class="fas fa-shopping-cart"/>
           <b-nav-text>Orders</b-nav-text>
-          <i id="header-icon" class="fas fa-angle-down"></i>
+          <i
+            id="header-icon"
+            class="fas fa-angle-down"/>
         </b-nav-item>
       </li>
-      <b-collapse id="order-collapse" class="m-auto">
+      <b-collapse
+        id="order-collapse"
+        class="m-auto">
         <ul class="list-unstyled">
           <li class="nav-item ">
-            <b-nav-item variant="primary" active>
-              <i id="icons" class="fas fa-folder-openr"></i>
+            <b-nav-item
+              variant="primary"
+              active>
+              <i
+                id="icons"
+                class="fas fa-folder-openr"/>
               <b-link :to="{name:'orders'}">Browse orders</b-link>
             </b-nav-item>
           </li>
           <li class="nav-item">
             <b-nav-item active>
-              <i id="icons" class="fas fa-folder-plus"></i>
+              <i
+                id="icons"
+                class="fas fa-folder-plus"/>
               <b-link :to="{name:'add-order'}">Restaurants</b-link>
             </b-nav-item>
           </li>
         </ul>
       </b-collapse>
       <!-- orders end -->
-      <li class="nav-item" v-b-toggle.users-collapse variant="primary">
+      <!-- users start -->
+      <li
+        v-b-toggle.users-collapse
+        class="nav-item"
+        variant="primary">
         <b-nav-item active>
-          <i id="icons" class="fas fa-users"></i>
+          <i
+            id="icons"
+            class="fas fa-users"/>
           <b-nav-text>Users</b-nav-text>
-          <i id="header-icon" class="fas fa-angle-down"></i>
+          <i
+            id="header-icon"
+            class="fas fa-angle-down"/>
         </b-nav-item>
       </li>
-      <b-collapse id="users-collapse" class="m-auto">
+      <b-collapse
+        id="users-collapse"
+        class="m-auto">
         <ul class="list-unstyled">
           <li class="nav-item ">
-            <b-nav-item variant="primary" active>
-              <i id="icons" class="fas fa-users"></i>
-              <b-link :to="{name:'users'}">Browse</b-link>
+            <b-nav-item
+              variant="primary"
+              active>
+              <i
+                id="icons"
+                class="fas fa-users"/>
+              <b-link :to="{name:'user'}">Browse</b-link>
             </b-nav-item>
           </li>
           <li class="nav-item">
             <b-nav-item active>
-              <i id="icons" class="fas fa-user-times"></i>
+              <i
+                id="icons"
+                class="fas fa-user-times"/>
               <b-link :to="{name:'delete-user'}">Delete user</b-link>
             </b-nav-item>
           </li>
           <li class="nav-item">
             <b-nav-item active>
-              <i id="icons" class="fas fa-users-cog "></i>
+              <i
+                id="icons"
+                class="fas fa-users-cog "/>
               <b-link :to="{name:'change-user'}">Change user</b-link>
             </b-nav-item>
           </li>
@@ -92,11 +142,12 @@
 </template>
 
 <script>
-export default { data () {
-  return {}
-},
+export default {
 
-components: {}}
+  components: {},
+  data () {
+    return {}
+  } }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

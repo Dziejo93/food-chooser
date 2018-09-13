@@ -1,11 +1,13 @@
 <template>
 
   <div class="card  shadow center-block m-auto ">
-    <div class="card-header" justify-content-center>
-      <h4 class="lead">{{title}}</h4>
+    <div
+      class="card-header"
+      justify-content-center>
+      <h4 class="lead">{{ title }}</h4>
     </div>
     <div class="card-body">
-      <slot></slot>
+      <slot/>
     </div>
   </div>
 </template>

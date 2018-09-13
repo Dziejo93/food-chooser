@@ -2,12 +2,15 @@
   <div id="app">
     <page-header/>
 
-    <div id="left" class="row">
-      <div class="col-md-auto border border-primary rounded ">
+    <div
+      id="left"
+      class="row">
 
-        <nav-menu/>
-      </div>
-      <main class="col m-2 " role="main">
+      <nav-menu/>
+
+      <main
+        class="col m-2 "
+        role="main">
         <router-view />
       </main>
     </div>
@@ -16,8 +19,8 @@
 </template>
 
 <script>
-import PageHeader from '@/components/templates/Header'
-import NavMenu from '@/components/templates/NavMenu'
+import PageHeader from '@/components/templates/Header';
+import NavMenu from '@/components/templates/NavMenu';
 export default {
   name: 'App',
   components: {

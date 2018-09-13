@@ -1,78 +1,77 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
-const passport = require('passport')
 
-const PagesController = require('../../controllers/PagesController')
-const PassportController = require('../../controllers/PassportController')
-const UserController = require('../../controllers/UserController.js')
+const passport = require("passport")
+const UserController = require("../../controllers/UserController")
+const PassportController = require("../../controllers/PassportController")
+const ProductController = require("../../controllers/ProductController")
+const RestaurantController = require("../../controllers/RestaurantController")
+const GoogleAuthController = require("../../controllers/GoogleAuthController")
+
 
 ///auth routes
-router.route('/login')
-    .get(PassportController.login)
-    .post(...PassportController.localLogin)
+router.route("/login")
+
+	.post(...PassportController.localLogin)
 
 
-router.route('/register')
-    .get(PassportController.register)
-    .post(PassportController.localSignUp)
+router.route("/register")
+	.post(PassportController.localSignUp)
 
 
-router.route('/google')
-    .get(passport.authenticate('google', {
-        scope: ['profile']
-    }), PassportController.googleLogin)
+router.route("/google")
+	.post(GoogleAuthController.postGoogleCode)
+	.get(GoogleAuthController.getGoogleUrl)
+
+// router.route("/google")
+// 	.get(passport.authenticate("google", {
+// 		scope: ["profile"]
+// 	}), PassportController.googleLogin)
 
 
-router.route('/google/redirect')
-    .get(...PassportController.googleRedir)
-
-
-router.route('/logout')
-    .get(PassportController.logout)
-
+// router.route("/google/redirect")
+// 	.get(...PassportController.googleRedir)
 
 //user routes
 
-//Auth
-router.route('/login')
-    .get(PassportController.login)
-    .post(...PassportController.localLogin)
+router.route("/users")
+	.get(UserController.getUsers)
+	.post(UserController.postUser)
+	.delete(UserController.deleteUsers)
 
 
-router.route('/register')
-    .get(PassportController.register)
-    .post(PassportController.localSignUp)
+router.route("/users/:id")
+	.get(UserController.getUser)
+	.put(UserController.putUser)
+	.delete(UserController.deleteUser)
+
+//product routes
+router.route("/products")
+	.get(ProductController.getProducts)
+	.post(ProductController.postProduct)
+	.delete(ProductController.deleteProducts)
+
+router.route("/products/:id")
+	.get(ProductController.getProduct)
+	.put(ProductController.updateProduct)
+	.delete(ProductController.deleteProduct)
+
+//restaurants routes
+router.route("/restaurants")
+	.get(RestaurantController.getRestaurants)
+	.post(RestaurantController.postRestaurant)
+	.delete(RestaurantController.deleteRestaurants)
+
+router.route("/restaurants/:id")
+	.get(RestaurantController.getRestaurant)
+	.put(RestaurantController.updateRestaurant)
+	.delete(RestaurantController.deleteRestaurant)
 
 
-router.route('/google')
-    .get(passport.authenticate('google', {
-        scope: ['profile']
-    }), PassportController.googleLogin)
+//
+router.route("/restaurants/:restaurantId/products/:productId")
+	.put(ProductController.putProductInRestaurant)
+// .delete
 
 
-router.route('/google/redirect')
-    .get(...PassportController.googleRedir)
-
-
-router.route('/logout')
-    .get(PassportController.logout)
-
-
-///Users
-
-router.route('/users')
-    .get(UserController.getUsers)
-    .post(UserController.postUser)
-    .delete(UserController.deleteUsers)
-
-
-router.route('/users/:id')
-    .get(UserController.getUser)
-    .post(UserController.postUser)
-    .put(UserController.putUser)
-    .delete(UserController.deleteUser)
-
-
-router.rout
-
-module.exports = router;
+module.exports = router

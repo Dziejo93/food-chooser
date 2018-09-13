@@ -13,9 +13,27 @@ import store from '@/store/store.js'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import {
+  library,
+  dom
+}
+  from '@fortawesome/fontawesome-svg-core'
+import {
+  fas
+} from '@fortawesome/free-solid-svg-icons'
+import {
+  FontAwesomeIcon
+} from '@fortawesome/vue-fontawesome'
+import GSignInButton from 'vue-google-signin-button'
+
+library.add(fas)
+dom.watch()
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
+Vue.use(GSignInButton)
 sync(store, router)
 /* eslint-disable no-new */
 new Vue({
@@ -23,8 +41,8 @@ new Vue({
   router,
   store,
   components: {
-    App
-
+    App,
+    FontAwesomeIcon
   },
   template: '<App/>'
 })

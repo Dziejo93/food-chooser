@@ -6,5 +6,11 @@ export default {
   },
   login (credentials) {
     return Api().post('login', credentials)
+  },
+  getGoogleUrl () {
+    return Api().get('google')
+  },
+  postGoogleCode (googleCode) {
+    return Api().post('google', googleCode)
   }
 }

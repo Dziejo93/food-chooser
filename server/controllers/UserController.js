@@ -4,6 +4,7 @@ const User = require("../models/user-model")
 
 
 module.exports = {
+
 	//CRUD Users
 	getUsers: async (req, res, next) => {
 		try {
@@ -66,6 +67,7 @@ module.exports = {
 			})
 		}
 	},
+
 
 	getUser: async (req, res, next) => {
 		try {

@@ -11,6 +11,7 @@ const Bcrypt = require("../helpers/Bcrypt")
 const User = require("../models/user-model")
 
 
+
 passport.serializeUser((user, done) => {
 	done(null, user.id)
 })
@@ -19,6 +20,7 @@ passport.deserializeUser((id, done) => {
 	User.findById(id).then((user) => {
 		done(null, user)
 	})
+
 })
 //TODO:CHANGE PROMISES TO FUCKING ASYNC
 
@@ -65,38 +67,37 @@ passport.use("googleProfile-strategy", new CustomStrategy(
 
 
 
-//google strategy
-//TODO:add try catch
-passport.use(
-	new GoogleStrategy({
-		callbackURL: "/api/google/redirect",
-		clientID: process.env.GOOGLE_CLIENT_ID,
-		clientSecret: process.env.GOOGLE_CLIENT_SECRET
-	}, async (accesToken, refreshToken, profile, done) => {
-		// check if user exists in db
-		const currentUser = await User.findOne({
-			"google.id": profile.id
-		})
-		if (currentUser) {
-			//exists
-			console.log("user is", currentUser)
-			done(null, currentUser)
+// //google strategy
+// //TODO:add try catch
+// passport.use(
+// 	new GoogleStrategy({
+// 		callbackURL: "/api/google/redirect",
+// 		clientID: process.env.GOOGLE_CLIENT_ID,
+// 		clientSecret: process.env.GOOGLE_CLIENT_SECRET
+// 	}, async (accesToken, refreshToken, profile, done) => {
+// 		// check if user exists in db
+// 		const currentUser = await User.findOne({
+// 			"google.id": profile.id
+// 		})
+// 		if (currentUser) {
+// 			//exists
+// 			console.log("user is", currentUser)
+// 			done(null, currentUser)
 
-		} else {
-			console.log(profile)
-			new User({
-				"google.id": profile.id,
-				"google.token": profile.token,
-				"google.name": profile.displayName,
-				"google.signed": new Date().getTime()
-			}).save().then((newUser) => {
-				console.log("new user created" + newUser)
-				done(null, newUser)
-			})
-		}
-
-	})
-)
+// 		} else {
+// 			console.log(profile)
+// 			new User({
+// 				"google.id": profile.id,
+// 				"google.token": profile.token,
+// 				"google.name": profile.displayName,
+// 				"google.signed": new Date().getTime()
+// 			}).save().then((newUser) => {
+// 				console.log("new user created" + newUser)
+// 				done(null, newUser)
+// 			})
+// 		}
+// 	})
+// )
 
 //local stategies
 passport.use("local-signup", new LocalStrategy({

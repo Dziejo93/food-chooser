@@ -65,10 +65,11 @@ router.route("/restaurants/:id")
 	.put(RestaurantController.updateRestaurant)
 	.delete(RestaurantController.deleteRestaurant)
 
-
+router.route("/restaurants/:restaurantId/products")
+	.get(RestaurantController.getRestaurantsProducts)
 //
 router.route("/restaurants/:restaurantId/products/:productId")
-	.put(ProductController.putProductInRestaurant)
+	.put(RestaurantController.putProductInRestaurant)
 // .delete
 
 

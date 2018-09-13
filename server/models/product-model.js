@@ -8,7 +8,7 @@ const productSchema = new Schema({
 	image: String,
 	vendor: {
 		type: Schema.Types.ObjectId,
-		ref: "restaurant"
+		ref: "Restaurant"
 	},
 
 

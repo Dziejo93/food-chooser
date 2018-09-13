@@ -140,40 +140,5 @@ module.exports = {
 				message: "Problem with deleting product"
 			})
 		}
-	},
-	putProductInRestaurant: async (req, res, next) => {
-		try {
-			const restaurant = await Restaurant.findById(req.params.restaurantId)
-			await Product.findByIdAndUpdate(req.params.productId, {
-				"vendor": restaurant
-			}, {
-				new: true
-			}, async (err,
-				result) => {
-				if (err) {
-					return res.status(404).send({
-						message: "problem with updating product"
-					})
-				}
-				if (!result) {
-					return res.status(404).send({
-						message: "product not found"
-					})
-				} else {
-					console.log(restaurant)
-					await restaurant.products.push(result)
-					await restaurant.save()
-					return res.status(200).send({
-						message: "product updated successfully",
-						result
-					})
-				}
-
-			})
-		} catch (error) {
-			return res.status(404).send({
-				message: "problem with updating product"
-			})
-		}
 	}
 }

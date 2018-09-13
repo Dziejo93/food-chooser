@@ -24,7 +24,8 @@ import {
 import {
   FontAwesomeIcon
 } from '@fortawesome/vue-fontawesome'
-import GSignInButton from 'vue-google-signin-button'
+import VueLodash from 'vue-lodash'
+// import GSignInButton from 'vue-google-signin-button'
 
 library.add(fas)
 dom.watch()
@@ -33,7 +34,8 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
-Vue.use(GSignInButton)
+Vue.use(VueLodash)
+// Vue.use(GSignInButton)
 sync(store, router)
 /* eslint-disable no-new */
 new Vue({

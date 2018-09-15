@@ -31,11 +31,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
-  methods: { ...mapActions(['setToken', 'setUser']),
+  methods: { ...mapActions(['setToken', 'setUser', 'setActiveOrderId']),
     ...mapGetters(['currentActiveUser', 'currentActiveOrder']),
     logOut () {
+      this.setActiveOrderId(null)
       this.setToken(null)
       this.setUser(null)
+
       this.$router.push({
         name: 'login'
       })

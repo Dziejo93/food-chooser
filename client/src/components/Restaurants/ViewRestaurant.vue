@@ -29,7 +29,6 @@
         </template>
       </modal>
       <template name="card-title" />
-
       <product-view>
         <template slot="product-title">{{ product.name }}</template>
         <template slot="product-text">{{ product.description }}</template>
@@ -38,7 +37,6 @@
             class="button"
             @click="openModal()"
           >Add to Order</b-btn>
-
         </template>
         <template slot="product-image">
           <img
@@ -73,10 +71,13 @@ export default {
     return {
       showModal: false,
       restaurant: {},
-      productToCart: { id: null, amount: 0 }
+      id: null,
+      amount: null,
+      productToCart: []
     }
   },
   async mounted () {
+    this.addToCart()
     const restaurantId = this.$store.state.route.params.restaurantId
     const restaurantResponse = await RestaurantService.getRestaurantWithProducts(
       restaurantId
@@ -89,6 +90,9 @@ export default {
     },
     closeModal () {
       this.showModal = false
+    },
+    addToCart () {
+      this.productToCart.push({ id: 1, quantity: 2 })
     }
   }
 }

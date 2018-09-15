@@ -24,7 +24,6 @@ import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     Panel
-
   },
   data () {
     return {
@@ -38,6 +37,7 @@ export default {
       orderId
     )
     this.order = orderResponse.data.order
+    this.setAccess()
   },
   methods: { ...mapGetters(['currentUser']),
     ...mapActions(['setActiveOrderId']),

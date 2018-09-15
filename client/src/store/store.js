@@ -21,6 +21,9 @@ export default new Vuex.Store({
   },
   getters: { currentUser: state => {
     return state.activeUser.user
+  },
+  currentActiveOrder: state => {
+    return state.activeOrder.id
   } },
   mutations: {
     setToken (state, token) {

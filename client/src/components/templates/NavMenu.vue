@@ -74,7 +74,7 @@
               active>
               <i
                 id="icons"
-                class="fas fa-folder-openr"/>
+                class="fas fa-shipping-fast"/>
               <b-link :to="{name:'orders-index'}">Browse orders</b-link>
             </b-nav-item>
           </li>

@@ -1,5 +1,8 @@
 <template>
-  <panel title="User">
+  <panel>
+    <template slot="header">
+      {{ user._id }}
+    </template>
     <user-card>
       <template slot="name">
         {{ user.local.username }}</template>

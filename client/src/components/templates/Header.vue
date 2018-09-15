@@ -16,18 +16,28 @@
         v-if="$store.state.activeUser.isUserLoggedIn"
         @click="logOut">Log Out</b-nav-item>
     </b-navbar-nav>
-
+    <b-navbar-nav
+      class="ml-auto"
+      right>
+      <b-nav-item
+        v-if="$store.state.activeOrder.id"
+        :to="{name:'order-view',params:{orderId:$store.state.activeOrder.id}}">
+        {{ $store.state.activeOrder.id }}
+      </b-nav-item>
+    </b-navbar-nav>
   </b-navbar>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
-  methods: {
+  methods: { ...mapActions(['setToken', 'setUser']),
+    ...mapGetters(['currentActiveUser', 'currentActiveOrder']),
     logOut () {
-      this.$store.dispatch('setToken', null)
-      this.$store.dispatch('setUser', null)
+      this.setToken(null)
+      this.setUser(null)
       this.$router.push({
-        name: 'root'
+        name: 'login'
       })
     }
   }

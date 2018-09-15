@@ -4,8 +4,11 @@ export default {
   getOrders () {
     return Api().get('orders')
   },
-  postNewOrder (issuerId) {
-    return Api().post('orders', issuerId)
+  postNewOrder (orderData) {
+    return Api().post('orders', orderData)
+  },
+  getOrderById (orderId) {
+    return Api().get(`orders/${orderId}`)
   }
 
 }

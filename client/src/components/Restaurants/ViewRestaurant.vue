@@ -1,6 +1,8 @@
 <template>
-  <panel :title="restaurant.name">
-
+  <panel>
+    <template slot="header">
+      {{ restaurant.name }}
+    </template>
     <div
       v-for="product in restaurant.products"
       :key="product.id">

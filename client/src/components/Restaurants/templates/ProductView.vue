@@ -5,10 +5,7 @@
         <div class="card-body d-flex flex-column align-items-start">
           <h4 class="card-title"><slot name="product-title"/></h4>
           <p class="card-text"><slot name="product-text"/></p>
-          <b-button-group>
-            <slot name="product-btn-grp"/>
-          </b-button-group>
-
+          <slot name="product-btn-grp"/>
         </div>
         <slot name="product-image"/>
       </div>

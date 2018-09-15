@@ -25,6 +25,7 @@ import {
   FontAwesomeIcon
 } from '@fortawesome/vue-fontawesome'
 import VueLodash from 'vue-lodash'
+
 // import GSignInButton from 'vue-google-signin-button'
 
 library.add(fas)

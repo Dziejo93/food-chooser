@@ -10,23 +10,35 @@ export default new Vuex.Store({
     createPersistedState()
   ],
   state: {
-    token: null,
-    user: null,
-    isUserLoggedIn: false
+    activeUser: {
+      token: null,
+      user: null,
+      isUserLoggedIn: false
+    },
+    activeOrder: {
+      id: null
+    }
   },
+  getters: { currentUser: state => {
+    return state.activeUser.user
+  } },
   mutations: {
     setToken (state, token) {
-      state.token = token
+      state.activeUser.token = token
       if (token) {
-        state.isUserLoggedIn = true
+        state.activeUser.isUserLoggedIn = true
       } else {
-        state.isUserLoggedIn = false
+        state.activeUser.isUserLoggedIn = false
       }
     },
     setUser (state, user) {
-      state.user = user
+      state.activeUser.user = user
+    },
+    setActiveOrderId (state, id) {
+      state.activeOrder.id = id
     }
   },
+
   actions: {
     setToken ({
       commit
@@ -37,7 +49,11 @@ export default new Vuex.Store({
       commit
     }, user) {
       commit('setUser', user)
+    },
+    setActiveOrderId ({ commit }, id) {
+      commit('setActiveOrderId', id)
     }
+
   }
 
 })

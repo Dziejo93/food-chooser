@@ -1,5 +1,8 @@
 <template>
-  <panel title="Login">
+  <panel >
+    <template slot="header">
+      Login
+    </template>
     <div class="container">
       <div class="row">
         <div class="col mx-auto">
@@ -37,6 +40,7 @@ import GoogleLoginButton from '@/components/templates/GoogleLoginButton'
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/templates/Panel'
 import Dialog from '@/components/templates/Dialog'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
     Panel,
@@ -51,14 +55,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setToken', 'setUser']),
     async login () {
       try {
         const response = await AuthenticationService.login({
           username: this.username,
           password: this.password
         })
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
+        this.setToken(response.data.token)
+        this.setUser(response.data.user)
+        this.$router.push({ name: 'restaurants' })
       } catch (err) {
         this.error = err.response.data.message
       }

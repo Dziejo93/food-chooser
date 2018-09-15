@@ -1,5 +1,8 @@
 <template>
-  <panel title="Restaurant">
+  <panel >
+    <template slot="header">
+      Restaurants
+    </template>
     <div
       v-for="restaurant in restaurants"
       :key="restaurant._id">

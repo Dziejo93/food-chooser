@@ -8,7 +8,9 @@ import RestaurantsIndex from '@/components/Restaurants/RestaurantsIndex'
 import ViewRestaurant from '@/components/Restaurants/ViewRestaurant'
 import AddRestaurant from '@/components/Restaurants/AddRestaurant'
 import GoogleLogin from '@/components/Authorisation/GoogleLogin'
-import EditRestaurant from '@/components/Restaurants/EditRestaurant'
+// import EditRestaurant from '@/components/Restaurants/EditRestaurant'
+import OrdersIndex from '@/components/Orders/OrdersIndex'
+import OrderView from '@/components/Orders/OrderView'
 Vue.use(Router)
 
 export default new Router({
@@ -45,12 +47,21 @@ export default new Router({
   }, {
     path: '/restaurants/add-restaurant',
     name: 'add-restaurant',
-    component: AddRestaurant
-  }, {
-    path: '/restaurants/:restaurantId',
-    name: 'edit-restaurant',
-    component: EditRestaurant,
-    props: true
+    component: AddRestaurant },
+  // }, {
+  //   path: '/restaurants/:restaurantId',
+  //   name: 'edit-restaurant',
+  //   component: EditRestaurant,
+  //   props: true
+  // },
+  { path: '/orders',
+    name: 'orders-index',
+    component: OrdersIndex },
+
+  {
+    path: '/orders/:orderId',
+    name: 'order-view',
+    component: OrderView
   }
 
   ]

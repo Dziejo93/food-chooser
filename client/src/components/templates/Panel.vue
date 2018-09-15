@@ -1,10 +1,9 @@
 <template>
-
   <div class="card  shadow center-block m-auto ">
     <div
       class="card-header"
       justify-content-center>
-      <h4 class="lead">{{ title }}</h4>
+      <h4 class="lead"><slot name="header"/></h4>
     </div>
     <div class="card-body">
       <slot/>
@@ -14,9 +13,7 @@
 
 <script>
 export default {
-  props: [
-    'title'
-  ]
+
 }
 </script>
 

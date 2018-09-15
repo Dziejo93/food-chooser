@@ -75,7 +75,7 @@
               <i
                 id="icons"
                 class="fas fa-folder-openr"/>
-              <b-link :to="{name:'orders'}">Browse orders</b-link>
+              <b-link :to="{name:'orders-index'}">Browse orders</b-link>
             </b-nav-item>
           </li>
           <li class="nav-item">
@@ -83,7 +83,7 @@
               <i
                 id="icons"
                 class="fas fa-folder-plus"/>
-              <b-link :to="{name:'add-order'}">Restaurants</b-link>
+              <b-link :to="{name:'add-order'}">Add Order</b-link>
             </b-nav-item>
           </li>
         </ul>

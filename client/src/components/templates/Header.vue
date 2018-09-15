@@ -7,13 +7,13 @@
     sticky="True">
     <b-navbar-nav>
       <b-nav-item
-        v-if="!$store.state.isUserLoggedIn"
+        v-if="!$store.state.activeUser.isUserLoggedIn"
         :to="{name:'register'}">Register</b-nav-item>
       <b-nav-item
-        v-if="!$store.state.isUserLoggedIn"
+        v-if="!$store.state.activeUser.isUserLoggedIn"
         :to="{name:'login'}">Login</b-nav-item>
       <b-nav-item
-        v-if="$store.state.isUserLoggedIn"
+        v-if="$store.state.activeUser.isUserLoggedIn"
         @click="logOut">Log Out</b-nav-item>
     </b-navbar-nav>
 

@@ -44,7 +44,6 @@ module.exports = {
 			console.log(
 				req.body
 			)
-
 			if (!findUser) {
 				const newUser = await new User({
 					"local.username": req.body.username,

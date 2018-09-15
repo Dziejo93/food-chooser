@@ -5,7 +5,9 @@ const UserController = require("../../controllers/UserController")
 const PassportController = require("../../controllers/PassportController")
 const ProductController = require("../../controllers/ProductController")
 const RestaurantController = require("../../controllers/RestaurantController")
+const OrdersController = require("../../controllers/OrdersController")
 const GoogleAuthController = require("../../controllers/GoogleAuthController")
+
 
 ///auth routes
 router.route("/login")
@@ -72,5 +74,13 @@ router.route("/restaurants/:restaurantId/products/:productId")
 	.put(RestaurantController.putProductInRestaurant)
 // .delete
 
+router.route("/orders")
+	.get(OrdersController.getOrders)
+	.post(OrdersController.postOrder)
+	.delete(OrdersController.deleteOrders)
+
+
+router.route("/orders/:orderId")
+	.get(OrdersController.getOrder)
 
 module.exports = router

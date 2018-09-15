@@ -71,14 +71,14 @@ module.exports = {
 						})
 						if (currentUser) {
 							const token = await signToken(currentUser)
-							res.status(200).send({currentUser,token})
+							res.status(200).send({user:currentUser,token:token})
 						} else {
 							const newUser = await new User({
 								"google.id": googleData.id,
 								"google.name": googleData.emails[0].value,
 							}).save()
 							const token = await signToken(newUser)
-							res.status(200).send({message:"new user created",newUser,token})
+							res.status(200).send({message:"new user created",user:newUser,token:token})
 						}
 					}
 				})

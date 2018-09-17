@@ -11,6 +11,7 @@ const Bcrypt = require("../helpers/Bcrypt")
 const User = require("../models/user-model")
 
 
+
 passport.serializeUser((user, done) => {
 	done(null, user.id)
 })
@@ -19,6 +20,7 @@ passport.deserializeUser((id, done) => {
 	User.findById(id).then((user) => {
 		done(null, user)
 	})
+
 })
 
 // JSON WEB TOKENS STRATEGY
@@ -37,6 +39,7 @@ passport.use(new JwtStrategy({
 		done(error, false)
 	}
 }))
+
 
 
 
@@ -61,6 +64,7 @@ passport.use(new JwtStrategy({
 
 // 	}
 // ))
+
 
 
 
@@ -93,7 +97,6 @@ passport.use(new JwtStrategy({
 // 				done(null, newUser)
 // 			})
 // 		}
-
 // 	})
 // )
 

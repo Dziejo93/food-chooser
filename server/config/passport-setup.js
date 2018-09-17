@@ -22,7 +22,6 @@ passport.deserializeUser((id, done) => {
 	})
 
 })
-//TODO:CHANGE PROMISES TO FUCKING ASYNC
 
 // JSON WEB TOKENS STRATEGY
 passport.use(new JwtStrategy({
@@ -33,7 +32,7 @@ passport.use(new JwtStrategy({
 		// Find the user specified in token
 		const user = await User.findById(payload.sub)
 		if (!user) {
-			return done(null, false)
+			return done(null, false,{message:"unathorised"})
 		}
 		done(null, user)
 	} catch (error) {
@@ -44,26 +43,28 @@ passport.use(new JwtStrategy({
 
 
 
-passport.use("googleProfile-strategy", new CustomStrategy(
-	async(req, done)=> {
-		const googleUser = await User.findOne({
-			"google.id":req.body.Eea
-		})
-		if(googleUser){
-			console.log("user is", googleUser)
-			done(null, googleUser)}
-		else{
-			const newGoogleUser =await new User({
-				"google.id": req.body.Eea,
-				"google.name": req.body.U3,
-				"google.signed": new Date().getTime(),
-				"google.updatedAt": new Date().getTime()
-			}).save()
-			done(null,newGoogleUser)
-		}
 
-	}
-))
+// passport.use("googleProfile-strategy", new CustomStrategy(
+// 	async(req, done)=> {
+// 		const googleUser = await User.findOne({
+// 			"google.id":req.body.Eea
+// 		})
+// 		if(googleUser){
+// 			console.log("user is", googleUser)
+// 			done(null, googleUser)}
+// 		else{
+// 			const newGoogleUser =await new User({
+// 				"google.id": req.body.Eea,
+// 				"google.name": req.body.U3,
+// 				"google.signed": new Date().getTime(),
+// 				"google.updatedAt": new Date().getTime()
+// 			}).save()
+// 			done(null,newGoogleUser)
+// 		}
+
+// 	}
+// ))
+
 
 
 

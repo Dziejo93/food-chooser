@@ -2,6 +2,7 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -10,19 +11,25 @@ export default {
       error: null
     }
   },
+
   async mounted () {
     try {
       const code = await this.$route.query.code
       console.log(code)
       const response = await AuthenticationService.postGoogleCode({ googleCode: code })
       if (response.data) {
-        console.log(response.data)
-
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.currentUser._id)
+        this.login(response.data)
       }
     } catch (err) {
       console.log(err)
+    }
+  },
+  methods: {
+    ...mapActions(['setToken', 'setUser']),
+    login (response) {
+      this.setToken(response.token)
+      this.setUser(response.user)
+      this.$router.push({ name: 'restaurants' })
     }
   } }
 </script>

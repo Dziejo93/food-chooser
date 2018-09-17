@@ -1,5 +1,8 @@
 <template>
-  <panel title="Add restaurant">
+  <panel >
+    <template slot="header">
+      Add restaurant
+    </template>
     <div>
       <b-form>
         <b-form-group

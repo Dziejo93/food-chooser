@@ -29,6 +29,7 @@
     "vue-awesome": "^3.1.2",
     "vue-google-oauth2": "^1.0.9",
     "vue-google-signin-button": "^1.0.2",
+    "vue-lodash": "^2.0.0",
     "vue-material-design-icons": "^2.1.1",
     "vue-router": "^3.0.1",
     "vuetify": "^1.1.9",

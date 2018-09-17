@@ -1,5 +1,8 @@
 <template>
-  <panel title="Restaurant">
+  <panel >
+    <template slot="header">
+      Restaurants
+    </template>
     <div
       v-for="restaurant in restaurants"
       :key="restaurant._id">
@@ -49,7 +52,7 @@ export default {
 
 <style scoped>
 .album-image {
-    /* if width/hight under 200px things get fucky */
+   
     height: 200px;
     width: 200px;
 }

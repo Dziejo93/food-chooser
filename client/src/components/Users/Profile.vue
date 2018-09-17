@@ -1,6 +1,8 @@
 <template>
-  <panel title="User">
-
+  <panel>
+    <template slot="header">
+      {{ user._id }}
+    </template>
     <user-card>
       <template slot="name">
         {{ user.local.username }}</template>
@@ -8,7 +10,6 @@
     </user-card>
   </panel>
 </template>
-
 <script>
 import Panel from '@/components/templates/Panel'
 import UserCard from '@/components/Users/templates/UserCard'

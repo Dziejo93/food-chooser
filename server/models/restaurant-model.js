@@ -7,7 +7,7 @@ const restaurantSchema = new Schema({
 	description: String,
 	products: [{
 		type: Schema.Types.ObjectId,
-		ref: "product"
+		ref: "Product"
 	}],
 
 },{timestamps:true})

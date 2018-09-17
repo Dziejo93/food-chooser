@@ -6,5 +6,8 @@ export default {
   },
   getRestaurant (restaurantId) {
     return Api().get(`restaurants/${restaurantId}`)
+  },
+  getRestaurantWithProducts (restaurantId) {
+    return Api().get(`restaurants/${restaurantId}/products`)
   }
 }

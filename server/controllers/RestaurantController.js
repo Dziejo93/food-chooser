@@ -1,7 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const Restaurant = require("../models/restaurant-model")
-
+const Product = require("../models/product-model")
 module.exports = {
 	getRestaurants: async (req, res, next) => {
 		try {
@@ -99,10 +99,12 @@ module.exports = {
 					return res.status(404).send({
 						message: err
 					})
+
 				} else if (!restaurant) {
 					return res.status(404).send({
 						message: "no result"
 					})
+
 				} else {
 					return res.status(200).send({
 						message: "restaurant updated",
@@ -122,6 +124,7 @@ module.exports = {
 					return res.status(404).send({
 						message: "problem with finding restaurant"
 					})
+
 				}
 				if (!result) {
 					return res.status(404).send({
@@ -138,5 +141,59 @@ module.exports = {
 				message: "Problem with deleting restaurant"
 			})
 		}
+	},
+	putProductInRestaurant: async (req, res, next) => {
+		try {
+			const restaurant = await Restaurant.findById(req.params.restaurantId)
+			await Product.findByIdAndUpdate(req.params.productId, {
+				"vendor": restaurant
+			}, {
+				new: true
+			}, async (err,
+				result) => {
+				if (err) {
+					return res.status(404).send({
+						message: "problem with updating product"
+					})
+				}
+				if (!result) {
+					return res.status(404).send({
+						message: "product not found"
+					})
+				} else {
+					console.log(restaurant)
+					await restaurant.products.push(result)
+					await restaurant.save()
+					return res.status(200).send({
+						message: "product updated successfully",
+						result
+					})
+				}
+
+			})
+		} catch (error) {
+			return res.status(404).send({
+				message: "problem with updating product"
+			})
+		}
+	},
+
+	getRestaurantsProducts: async (req, res, next) => {
+		try {
+			const restaurant = await Restaurant.findById(req.params.restaurantId).populate("products")
+			if (!restaurant.products) {
+				res.status(404).send({
+					message: "restaurant has no products"
+				})
+
+			}
+			res.status(200).send(restaurant)
+		} catch (error) {
+			res.status(404).send(error)
+										
+		}
+
+
+
 	}
 }

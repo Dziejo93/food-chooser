@@ -30,7 +30,7 @@ module.exports = {
 			})
 		} catch (error) {
 			return res.status(404).send({
-				message: "Problem with deletingproducts"
+				message: "Problem with deleting products"
 			})
 		}
 	},

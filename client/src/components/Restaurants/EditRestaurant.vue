@@ -24,7 +24,7 @@ export default { components: { Panel },
 
 <style scoped>
 .album-image {
-  /* if width/hight under 200px things get fucky */
+  
   height: 200px;
   width: 200px;
 }

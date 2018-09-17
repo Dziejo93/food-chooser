@@ -36,16 +36,12 @@
 </template>
 
 <script>
-import GoogleLoginButton from '@/components/templates/GoogleLoginButton'
 import AuthenticationService from '@/services/AuthenticationService'
 import Panel from '@/components/templates/Panel'
-import Dialog from '@/components/templates/Dialog'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   components: {
-    Panel,
-    Dialog,
-    GoogleLoginButton
+    Panel
   },
   data () {
     return {

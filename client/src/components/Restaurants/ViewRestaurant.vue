@@ -110,8 +110,7 @@ export default {
 }
 
 .card-image-right {
-  /* if width/hight under 200px things get fucky */
-  height: 200px;
+   height: 200px;
   width: 200px;
 }
 </style>

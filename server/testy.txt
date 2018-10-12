@@ -1,6 +1,0 @@
-Log In:
--there is no user
--wrong password
--does passwords look different in db
--checking hashing methods
-
